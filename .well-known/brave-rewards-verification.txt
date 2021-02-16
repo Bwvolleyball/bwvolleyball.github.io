@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: bwvolleyball.github.io
+Token: 8bc80301ee9c6158adcd3f6ed089b9eeb2dd395e3248629d88291c09b54c010d
