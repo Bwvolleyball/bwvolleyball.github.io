@@ -1,0 +1,13 @@
+{
+  "role": "Software Engineer",
+  "company": "Zen Planner",
+  "location": "Highlands Ranch, CO",
+  "start": "Nov 2018",
+  "end": "May 2019",
+  "highlights": [
+    "Migrated applications to AWS-hosted Kubernetes with observability in place.",
+    "Improved CI/CD with custom git hooks and Jenkins pipelines for faster feedback.",
+    "Mentored teams on Spring Boot and Java patterns."
+  ],
+  "stacks": ["Java", "Spring Boot", "Kubernetes", "AWS", "Jenkins", "CI/CD"]
+}

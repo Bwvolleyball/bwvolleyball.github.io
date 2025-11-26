@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../config/site';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('writing', ({ data }) => !data.external);
+	return posts.map((post) => ({
+		params: { slug: post.slug },
+		props: { post },
+	}));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const title = `${post.data.title} | Writing`;
+---
+
+<BaseLayout title={title} description={post.data.summary}>
+	<article class="max-w-none">
+		<p class="text-sm font-semibold text-ink-500">Writing</p>
+		<h1 class="text-4xl font-semibold text-ink-050">{post.data.title}</h1>
+		<p class="text-ink-400">Published {post.data.published}</p>
+		<div class="article-content mt-6 rounded-3xl border border-white/10 bg-surface-3/70 p-6 text-base leading-relaxed text-ink-050">
+			<Content />
+		</div>
+	</article>
+	<div class="mt-8 flex flex-wrap gap-3">
+		<a class="pill text-xs font-semibold text-ink-050" href="/writing">
+			<span class="pill-dot"></span>
+			Back to writing
+		</a>
+		<a
+			class="pill text-xs font-semibold text-ink-050"
+			href={site.linkedin}
+			target="_blank"
+			rel="noreferrer"
+		>
+			<span class="pill-dot"></span>
+			Contact on LinkedIn
+		</a>
+	</div>
+</BaseLayout>
+
+<style>
+	.article-content :global(p) {
+		margin: 0 0 1rem;
+	}
+	.article-content :global(ul) {
+		margin: 0 0 1rem;
+		padding-left: 1.2rem;
+		color: var(--color-ink-300);
+	}
+	.article-content :global(li) {
+		margin-bottom: 0.4rem;
+	}
+	.article-content :global(h2) {
+		margin: 1rem 0 0.5rem;
+		font-size: 1.25rem;
+		color: var(--color-ink-050);
+	}
+</style>

@@ -1,0 +1,15 @@
+{
+  "role": "Associate Software Applications Engineer",
+  "company": "Charles Schwab",
+  "location": "Lone Tree, CO",
+  "start": "Jun 2015",
+  "end": "Aug 2017",
+  "highlights": [
+    "Key Contributor Award (2016).",
+    "Improved TDD with Mockito and expanded Bitbucket + Git Flow adoption.",
+    "Led legacy → Spring Boot microservice migrations on PCF.",
+    "Enhanced full-stack financial planning apps (Java, Struts, Spring, JS) consuming REST/SOAP."
+  ],
+  "stacks": ["Java", "Spring Boot", "Struts", "PCF", "REST", "SOAP", "TDD"],
+  "awards": ["Key Contributor (2016)"]
+}

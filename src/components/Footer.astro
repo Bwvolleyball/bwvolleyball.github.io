@@ -1,0 +1,23 @@
+---
+import { site } from '../config/site';
+---
+
+<footer class="mx-auto mt-12 max-w-6xl px-6 pb-10 text-sm text-ink-500 lg:px-8">
+	<div class="glass flex flex-col gap-3 rounded-2xl px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+		<div>
+			<p class="text-ink-050 font-semibold">Let&apos;s build reliable teams and platforms.</p>
+			<p>Reach out via LinkedIn for collaboration, mentoring, or speaking.</p>
+		</div>
+		<a
+			class="pill focus-ring"
+			href={site.linkedin}
+			target="_blank"
+			rel="noreferrer"
+			aria-label="Contact on LinkedIn"
+		>
+			<span class="pill-dot"></span>
+			LinkedIn
+		</a>
+	</div>
+	<p class="mt-4 text-center text-xs text-ink-500">Built with Astro + Tailwind.</p>
+</footer>

@@ -1,0 +1,14 @@
+{
+  "role": "Software Engineer",
+  "company": "Promontory MortgagePath",
+  "location": "Remote",
+  "start": "May 2019",
+  "end": "Feb 2021",
+  "highlights": [
+    "Built event-sourced Spring Boot services (Axon) in Kotlin/Java.",
+    "Evolved REST + GraphQL APIs with backward compatibility and consumer safety.",
+    "Delivered Angular/TypeScript web app enhancements with UX partners.",
+    "Mentored teams on Spring, Java, and Kotlin best practices."
+  ],
+  "stacks": ["Kotlin", "Java", "Spring Boot", "Axon", "GraphQL", "REST", "Angular", "TypeScript"]
+}

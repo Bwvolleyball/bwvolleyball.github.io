@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../config/site';
+import { getCollection } from 'astro:content';
+
+const experiences = (await getCollection('experience')).sort(
+	(a, b) => new Date(b.data.start).getTime() - new Date(a.data.start).getTime(),
+);
+---
+
+<BaseLayout title="Experience | Brandon Ward" description="Timeline of engineering leadership, delivery impact, and awards.">
+	<section class="flex flex-col gap-2">
+		<p class="text-sm font-semibold text-ink-500">Experience</p>
+		<h1 class="text-4xl font-semibold text-ink-050">Platform + delivery leadership</h1>
+		<p class="max-w-3xl text-ink-300">
+			From StackHawk integrations to Schwab starter kits, I build resilient services, integrations,
+			and CI/CD systems—while mentoring teams to ship with confidence.
+		</p>
+	</section>
+
+	<section class="mt-10 grid gap-4">
+		{experiences.map((item) => (
+			<article id={item.slug} class="glass rounded-3xl border border-white/10 p-6">
+				<div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+					<div>
+						<h2 class="text-xl font-semibold text-ink-050">
+							{item.data.role} · {item.data.company}
+						</h2>
+						<p class="text-sm text-ink-400">{item.data.location}</p>
+					</div>
+					<div class="pill text-xs text-ink-050">
+						<span class="pill-dot"></span>
+						{item.data.start} – {item.data.end}
+					</div>
+				</div>
+				<ul class="mt-3 grid gap-2 text-sm text-ink-300">
+					{item.data.highlights.map((line) => (
+						<li>• {line}</li>
+					))}
+				</ul>
+				{item.data.awards && (
+					<div class="mt-3 flex flex-wrap gap-2">
+						{item.data.awards.map((award) => (
+							<span class="pill bg-ink-900/40 text-xs text-amber">{award}</span>
+						))}
+					</div>
+				)}
+				{item.data.stacks && (
+					<div class="mt-3 flex flex-wrap gap-2">
+						{item.data.stacks.map((stack) => (
+							<span class="pill text-xs text-ink-050">{stack}</span>
+						))}
+					</div>
+				)}
+			</article>
+		))}
+	</section>
+
+	<section class="mt-10 glass rounded-3xl border border-white/10 p-6">
+		<h3 class="text-2xl font-semibold text-ink-050">Tooling lane</h3>
+		<p class="text-ink-300">
+			CI/CD migrations, Gradle plugins, Argo/GitHub Actions workflows, Kubernetes rollouts, and
+			platform integrations shipped with traceable guardrails.
+		</p>
+		<div class="mt-4 flex flex-wrap gap-2">
+			{['GitHub Actions', 'Gradle plugins', 'Argo Workflows', 'Kubernetes', 'Quality gates', 'Rollout choreography'].map(
+				(tag) => (
+					<span class="pill text-xs text-ink-050">{tag}</span>
+				),
+			)}
+		</div>
+	</section>
+
+	<section class="mt-10 flex flex-col gap-3">
+		<h3 class="text-xl font-semibold text-ink-050">Let&apos;s collaborate</h3>
+		<p class="text-ink-300">
+			If you need delivery acceleration, integrations, or steady mentorship for teams, reach out on
+			LinkedIn.
+		</p>
+		<a
+			class="pill focus-ring w-fit text-sm font-semibold text-ink-050"
+			href={site.linkedin}
+			target="_blank"
+			rel="noreferrer"
+		>
+			<span class="pill-dot"></span>
+			Connect on LinkedIn
+		</a>
+	</section>
+</BaseLayout>

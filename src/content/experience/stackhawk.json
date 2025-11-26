@@ -1,0 +1,15 @@
+{
+  "role": "Senior Software Engineer",
+  "company": "StackHawk",
+  "location": "Denver, CO",
+  "start": "Jan 2022",
+  "end": "Present",
+  "highlights": [
+    "Shipped Kotlin/Spring Boot services exposing REST + gRPC for security scanning workflows.",
+    "Delivered GitHub, Snyk, and Azure DevOps integrations via Argo Workflows/Jobs with hardened rollout paths.",
+    "Modernized React SPA state (redux → nanostores) and performance tuning to cut bundle weight.",
+    "Built custom Gradle plugins; migrated CI/CD to GitHub Actions with richer reports and guardrails.",
+    "Mentored engineers across Kotlin, Gradle, Spring Boot, Kubernetes, and iterative delivery."
+  ],
+  "stacks": ["Kotlin", "Spring Boot", "gRPC", "REST", "Gradle", "GitHub Actions", "Argo", "React", "Nanostores", "Kubernetes"]
+}

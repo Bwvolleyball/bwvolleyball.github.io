@@ -1,0 +1,62 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import { site } from '../config/site';
+
+const links = [
+	{ href: '/', label: 'Home' },
+	{ href: '/experience', label: 'Experience' },
+	{ href: '/projects', label: 'Projects' },
+	{ href: '/speaking', label: 'Speaking' },
+	{ href: '/writing', label: 'Writing' },
+	{ href: '/contact', label: 'Contact' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50">
+	<div
+		class="glass mx-auto flex max-w-6xl items-center justify-between gap-4 rounded-2xl px-4 py-3 lg:px-6 lg:py-4"
+	>
+		<a href="/" class="flex items-center gap-3 font-semibold tracking-tight text-ink-050">
+			<div class="pill-dot"></div>
+			<span>Brandon Ward</span>
+		</a>
+		<nav class="hidden items-center gap-2 text-sm font-semibold text-ink-300 md:flex">
+			{links.map((link) => {
+				const isActive =
+					(currentPath === '/' && link.href === '/') ||
+					(currentPath.startsWith(link.href) && link.href !== '/');
+				return (
+					<a
+						class={`rounded-full px-3 py-2 transition hover:text-ink-050 ${
+							isActive ? 'bg-ink-900/30 text-ink-050' : ''
+						}`}
+						href={link.href}
+					>
+						{link.label}
+					</a>
+				);
+			})}
+		</nav>
+		<div class="flex items-center gap-2">
+			<a
+				class="hidden rounded-full border border-white/10 px-3 py-2 text-sm font-semibold text-ink-050 transition hover:border-white/30 hover:text-white sm:inline-flex"
+				href={site.resume}
+				target="_blank"
+				rel="noreferrer"
+			>
+				Résumé
+			</a>
+			<a
+				class="hidden rounded-full bg-gradient-to-r from-amber to-teal px-3 py-2 text-sm font-semibold text-ink-900 transition hover:opacity-90 md:inline-flex"
+				href={site.linkedin}
+				target="_blank"
+				rel="noreferrer"
+			>
+				LinkedIn
+			</a>
+			<ThemeToggle />
+		</div>
+	</div>
+</header>

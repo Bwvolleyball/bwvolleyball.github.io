@@ -1,0 +1,15 @@
+{
+  "role": "Staff Software Applications Engineer",
+  "company": "Charles Schwab",
+  "location": "Lone Tree, CO",
+  "start": "Aug 2017",
+  "end": "Nov 2018",
+  "highlights": [
+    "Awards: Key Contributor (2017), Tech Services Champion (Q4 2017), Mad Skillz (Q4 2017).",
+    "Led cloud service integrations: Eureka, Spring Cloud Config, Spring Cloud Gateway.",
+    "Architected distributed microservices and an event-driven integration automation framework.",
+    "Placed 2nd in company code-a-thon with Spring Boot starters."
+  ],
+  "stacks": ["Java", "Spring Boot", "Spring Cloud", "Microservices", "Gateway", "Automation"],
+  "awards": ["Key Contributor (2017)", "Tech Services Champion (Q4 2017)", "Mad Skillz (Q4 2017)"]
+}

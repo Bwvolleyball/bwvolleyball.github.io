@@ -1,0 +1,15 @@
+{
+  "role": "Senior Software Engineer",
+  "company": "Promontory MortgagePath",
+  "location": "Remote",
+  "start": "Feb 2021",
+  "end": "Dec 2021",
+  "highlights": [
+    "Lightkeeper Award (Q1 2021) for delivery and mentoring.",
+    "Ran architecture reviews to align services with platform standards and reliability targets.",
+    "Uplifted Kubernetes development clusters; CI/CD + release cadence accelerated from 3 months to 1 week.",
+    "Led Maven → Gradle (Kotlin DSL) migrations and team mentoring across Spring/Kotlin/Java."
+  ],
+  "stacks": ["Kotlin", "Java", "Spring Boot", "Gradle", "Kubernetes", "CI/CD", "Architecture"],
+  "awards": ["Lightkeeper Award (Q1 2021)"]
+}

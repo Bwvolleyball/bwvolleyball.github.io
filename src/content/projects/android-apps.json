@@ -1,0 +1,9 @@
+{
+  "title": "Android Apps Portfolio",
+  "slug": "android-apps",
+  "summary": "Published Android utilities (Binary2Hex, SimpleBAC, RecipeOrganizr) built end-to-end as a solo founder.",
+  "problem": "Users wanted lightweight utilities with offline-first behavior and simple UX.",
+  "approach": "Built Java/Gradle apps with SQLite, Dagger, and AdMob; handled design, development, and release.",
+  "impact": "Multiple apps shipped to the Play Store with steady usage and feedback loops.",
+  "tech": ["Android", "Java", "Gradle", "SQLite", "Dagger", "AdMob"]
+}

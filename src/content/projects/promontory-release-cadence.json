@@ -1,0 +1,10 @@
+{
+  "title": "Promontory Release Cadence Acceleration",
+  "slug": "promontory-release-cadence",
+  "summary": "Overhauled CI/CD and environment readiness to shrink release cycles from quarterly to weekly.",
+  "problem": "Three-month release cycles with brittle environments blocked rapid delivery and feedback.",
+  "approach": "Rebuilt pipelines, tightened promotion quality gates, uplifted Kubernetes dev clusters, and standardized Gradle builds to remove drift.",
+  "impact": "Teams moved from quarterly to weekly releases with higher confidence and predictable rollouts.",
+  "metrics": ["Release cadence improved 12x (3 months → 1 week)", "Reduced environment drift and rollout incidents"],
+  "tech": ["Kubernetes", "Gradle", "CI/CD", "Spring Boot", "Quality Gates"]
+}

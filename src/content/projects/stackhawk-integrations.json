@@ -1,0 +1,14 @@
+{
+  "title": "StackHawk Integrations & State Migration",
+  "slug": "stackhawk-integrations",
+  "summary": "Expanded StackHawk’s platform with GitHub, Snyk, and Azure DevOps integrations while modernizing front-end state management.",
+  "problem": "Customers needed streamlined security scanning hooks into their existing SDLC tools, and the SPA state layer was slowing delivery.",
+  "approach": "Built Kotlin/Spring Boot services exposing REST + gRPC backed by Argo Workflows/Jobs; hardened rollout paths. Migrated the React app from redux to nanostores to shrink bundle size and simplify data flows.",
+  "impact": "Reduced integration setup friction, increased automation adoption, and sped up UI delivery with leaner state management.",
+  "metrics": [
+    "3 major integrations delivered with consistent auth/tenant isolation patterns",
+    "SPA bundle weight trimmed while keeping feature velocity",
+    "GitHub Actions pipelines now emit richer reports for stakeholders"
+  ],
+  "tech": ["Kotlin", "Spring Boot", "gRPC", "REST", "Argo", "React", "Nanostores", "GitHub Actions"]
+}

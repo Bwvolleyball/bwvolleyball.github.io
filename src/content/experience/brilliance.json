@@ -1,0 +1,13 @@
+{
+  "role": "Founder / Engineer",
+  "company": "Brilliance Animation Studios",
+  "location": "Denver, CO",
+  "start": "May 2013",
+  "end": "Jun 2015",
+  "highlights": [
+    "Published Android apps (Binary2Hex, SimpleBAC, RecipeOrganizr) using Java/Gradle and SQLite.",
+    "Implemented Dagger-powered modules with AdMob monetization and analytics.",
+    "Ran full product lifecycle from concept to release."
+  ],
+  "stacks": ["Android", "Java", "Gradle", "SQLite", "Dagger", "AdMob"]
+}

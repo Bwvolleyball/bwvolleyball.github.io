@@ -1,0 +1,178 @@
+@import "@fontsource-variable/space-grotesk";
+@import "@fontsource-variable/sora";
+@import "tailwindcss";
+
+@theme {
+	--font-display: "Space Grotesk Variable", "Space Grotesk", "Sora Variable", "Sora", system-ui,
+		-apple-system, sans-serif;
+	--font-body: "Sora Variable", "Sora", system-ui, -apple-system, sans-serif;
+
+	--color-surface: #05080c;
+	--color-surface-2: #0b1016;
+	--color-surface-3: #0f1724;
+	--color-panel: #0f1c2d;
+	--color-ink-050: #f6f7fb;
+	--color-ink-100: #e8edf5;
+	--color-ink-300: #b8c2d7;
+	--color-ink-500: #91a0b9;
+	--color-ink-700: #667389;
+	--color-ink-900: #0b1016;
+
+	--color-amber: #f7ae3b;
+	--color-teal: #38e3d2;
+	--color-magenta: #f05f9f;
+
+	--shadow-soft: 0 10px 60px rgba(0, 0, 0, 0.4);
+	--shadow-strong: 0 30px 120px rgba(0, 0, 0, 0.65);
+	--gradient-warm: linear-gradient(135deg, #f7ae3b 0%, #38e3d2 50%, #7bd4ff 100%);
+	--gradient-radial: radial-gradient(circle at 20% 20%, rgba(240, 95, 159, 0.18) 0, transparent 35%),
+		radial-gradient(circle at 80% 0%, rgba(56, 227, 210, 0.16) 0, transparent 32%),
+		radial-gradient(circle at 60% 70%, rgba(247, 174, 59, 0.14) 0, transparent 36%);
+}
+
+:root {
+	color-scheme: dark;
+	background: var(--color-surface);
+}
+
+[data-theme="light"] {
+	color-scheme: light;
+	--color-surface: #f7f9fc;
+	--color-surface-2: #eef2f8;
+	--color-surface-3: #e6ecf6;
+	--color-panel: #ffffff;
+	--color-ink-050: #0b1016;
+	--color-ink-100: #1f2933;
+	--color-ink-300: #3c4756;
+	--color-ink-500: #4f5d73;
+	--color-ink-700: #6a7a92;
+	--color-ink-900: #111827;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	font-family: var(--font-body);
+	background: var(--color-surface);
+	color: var(--color-ink-050);
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	position: relative;
+}
+
+::selection {
+	background: rgba(240, 95, 159, 0.35);
+	color: var(--color-ink-050);
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+img {
+	max-width: 100%;
+	display: block;
+}
+
+.grid-overlay {
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+	background-size: 120px 120px, 120px 120px;
+	opacity: 0.35;
+	mask-image: radial-gradient(circle at 40% 20%, black 0%, transparent 55%);
+}
+
+.surface {
+	background: color-mix(in srgb, var(--color-surface-2) 80%, transparent);
+	border: 1px solid rgba(255, 255, 255, 0.06);
+	box-shadow: var(--shadow-soft);
+}
+
+.glass {
+	background: color-mix(in srgb, var(--color-surface-3) 60%, transparent);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	backdrop-filter: blur(18px);
+	box-shadow: var(--shadow-soft);
+}
+
+.accent-gradient {
+	background-image: var(--gradient-warm);
+}
+
+.beam {
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	background: var(--gradient-radial);
+	filter: blur(40px);
+	opacity: 0.6;
+}
+
+.shimmer {
+	background-image: linear-gradient(
+		120deg,
+		rgba(255, 255, 255, 0.06) 0%,
+		rgba(255, 255, 255, 0.22) 25%,
+		rgba(255, 255, 255, 0.06) 50%
+	);
+	background-size: 200% 100%;
+	animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+	0% {
+		background-position: 200% 0;
+	}
+	100% {
+		background-position: -200% 0;
+	}
+}
+
+.fade-up {
+	animation: fade-up 0.9s ease forwards;
+	opacity: 0;
+	transform: translateY(24px);
+}
+
+@keyframes fade-up {
+	0% {
+		opacity: 0;
+		transform: translateY(24px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.focus-ring:focus-visible {
+	outline: 2px solid var(--color-amber);
+	outline-offset: 2px;
+}
+
+.pill {
+	border-radius: 999px;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	padding: 8px 12px;
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	background: color-mix(in srgb, var(--color-surface-3) 70%, transparent);
+	font-weight: 600;
+}
+
+.pill-dot {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: var(--color-amber);
+	box-shadow: 0 0 0 6px rgba(247, 174, 59, 0.12);
+}

@@ -1,0 +1,12 @@
+{
+  "role": "Tech Track Intern",
+  "company": "Charles Schwab",
+  "location": "Lone Tree, CO",
+  "start": "Jun 2014",
+  "end": "Aug 2014",
+  "highlights": [
+    "Built SQL stored procedures and SSIS packages for automated weekly business reports.",
+    "Presented mobile app concepts targeting millennial investors to leadership."
+  ],
+  "stacks": ["SQL", "SSIS", "Data Automation"]
+}

@@ -1,0 +1,12 @@
+{
+  "role": "Student Tutor",
+  "company": "Regis University",
+  "location": "Denver, CO",
+  "start": "Aug 2011",
+  "end": "May 2015",
+  "highlights": [
+    "Math and CS tutoring with launch of online CS tutoring for non-traditional students.",
+    "Supported learners with structured problem-solving and fundamentals practice."
+  ],
+  "stacks": ["Mentoring", "Algorithms", "Discrete Math"]
+}

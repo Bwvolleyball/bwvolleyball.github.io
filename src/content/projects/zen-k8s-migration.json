@@ -1,0 +1,9 @@
+{
+  "title": "Zen Planner Kubernetes Migration",
+  "slug": "zen-planner-k8s",
+  "summary": "Moved production workloads to AWS-hosted Kubernetes with CI/CD improvements.",
+  "problem": "Legacy deployment targets and brittle pipelines slowed delivery and observability.",
+  "approach": "Migrated services onto Kubernetes with health probes and monitoring; added custom git hooks and Jenkins pipelines to harden delivery.",
+  "impact": "Higher deployment reliability, clearer visibility, and faster feedback loops for engineers.",
+  "tech": ["Kubernetes", "AWS", "Jenkins", "Java", "Spring Boot", "CI/CD"]
+}

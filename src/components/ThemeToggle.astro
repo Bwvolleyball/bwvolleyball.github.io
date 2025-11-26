@@ -1,0 +1,32 @@
+<button
+	id="theme-toggle"
+	class="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-ink-900/30 text-ink-050 transition hover:border-white/30 hover:text-white focus-ring"
+	type="button"
+	aria-label="Toggle color theme"
+>
+	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
+		<path
+			d="M12 3a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1Zm7.071 3.929a1 1 0 0 1 0 1.414l-1.414 1.414a1 1 0 1 1-1.414-1.414l1.414-1.414a1 1 0 0 1 1.414 0ZM21 13a1 1 0 1 1 0-2h-2a1 1 0 1 1 0 2h2Zm-3.929 7.071a1 1 0 0 1-1.414 0l-1.414-1.414a1 1 0 0 1 1.414-1.414l1.414 1.414a1 1 0 0 1 0 1.414ZM13 19a1 1 0 1 1-2 0v-2a1 1 0 1 1 2 0v2Zm-7.071-1.929a1 1 0 0 1 0-1.414l1.414-1.414a1 1 0 1 1 1.414 1.414L7.343 18.07a1 1 0 0 1-1.414 0ZM5 13a1 1 0 1 1 0-2H3a1 1 0 0 1 0 2h2Zm1.929-7.071a1 1 0 0 1 1.414 0l1.414 1.414A1 1 0 1 1 8.343 8.757L6.93 7.343a1 1 0 0 1 0-1.414ZM12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"
+		/>
+	</svg>
+</button>
+
+<script>
+	const root = document.documentElement;
+	const toggle = document.getElementById('theme-toggle');
+
+	const applyTheme = (mode) => {
+		if (!root) return;
+		root.dataset.theme = mode;
+		localStorage.setItem('theme', mode);
+	};
+
+	const stored = localStorage.getItem('theme');
+	const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+	applyTheme(stored ?? (prefersDark ? 'dark' : 'light'));
+
+	toggle?.addEventListener('click', () => {
+		const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+		applyTheme(next);
+	});
+</script>

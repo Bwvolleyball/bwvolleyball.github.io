@@ -1,13 +1,46 @@
-# bwvolleyball.github.io
-> My GitHub Pages website - powered by Angular!
+# Astro Starter Kit: Basics
 
-Hello! You've (probably) stumbled across the repository for my GitHub Pages website, but you won't find
-any source code here! The source code for this project lives in [this repository](https://github.com/Bwvolleyball/bwvolleyball-github-io-src).
+```sh
+npm create astro@latest -- --template basics
+```
 
-This GitHub repository only receives the pre-built Angular website, via a [GitHub Actions job](https://github.com/Bwvolleyball/bwvolleyball-github-io-src/blob/master/.github/workflows/push-to-gh-pages.yml),
-through which it is deployed to this website via the [angular-cli-ghpages tool](https://www.npmjs.com/package/angular-cli-ghpages).
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-If you would also like an Angualar website as your GitHub Pages website, 
-check out [this blog post](https://medium.com/@brandon.ward1993/angular-for-github-pages-35be855a4b0?source=friends_link&sk=835ad2a4cb6cf032d71403f966f6504e) that details how you might achieve it!
+## 🚀 Project Structure
 
-Other than that, thanks for visiting, and be sure to check out the real website @ https://bwvolleyball.github.io.
+Inside of your Astro project, you'll see the following folders and files:
+
+```text
+/
+├── public/
+│   └── favicon.svg
+├── src
+│   ├── assets
+│   │   └── astro.svg
+│   ├── components
+│   │   └── Welcome.astro
+│   ├── layouts
+│   │   └── Layout.astro
+│   └── pages
+│       └── index.astro
+└── package.json
+```
+
+To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+
+## 🧞 Commands
+
+All commands are run from the root of the project, from a terminal:
+
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
+
+## 👀 Want to learn more?
+
+Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).

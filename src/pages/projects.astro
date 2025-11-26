@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../config/site';
+import { getCollection } from 'astro:content';
+
+const order = [
+	'stackhawk-integrations',
+	'promontory-release-cadence',
+	'schwab-starters',
+	'zen-k8s-migration',
+	'android-apps',
+];
+
+const projects = (await getCollection('projects')).sort(
+	(a, b) => order.indexOf(a.data.slug) - order.indexOf(b.data.slug),
+);
+---
+
+<BaseLayout title="Projects | Brandon Ward" description="Case studies for integrations, delivery acceleration, and platform tooling.">
+	<section class="flex flex-col gap-2">
+		<p class="text-sm font-semibold text-ink-500">Projects</p>
+		<h1 class="text-4xl font-semibold text-ink-050">Case studies</h1>
+		<p class="max-w-3xl text-ink-300">
+			Data-driven delivery: integrations, CI/CD transformations, migration playbooks, and starter kits
+			that keep teams fast and safe.
+		</p>
+	</section>
+
+	<section class="mt-10 grid gap-6">
+		{projects.map((project) => (
+			<article
+				id={project.data.slug}
+				class="glass rounded-3xl border border-white/10 p-6 shadow-[0_20px_80px_rgba(0,0,0,0.45)]"
+			>
+				<div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+					<h2 class="text-2xl font-semibold text-ink-050">{project.data.title}</h2>
+					<div class="pill text-xs text-ink-050">
+						<span class="pill-dot"></span>
+						Impact
+					</div>
+				</div>
+				<p class="mt-2 text-ink-300">{project.data.summary}</p>
+				<div class="mt-4 grid gap-3 md:grid-cols-3">
+					<div class="rounded-2xl border border-white/5 bg-surface-3/70 p-4">
+						<p class="text-sm font-semibold text-ink-400">Problem</p>
+						<p class="text-sm text-ink-200">{project.data.problem}</p>
+					</div>
+					<div class="rounded-2xl border border-white/5 bg-surface-3/70 p-4">
+						<p class="text-sm font-semibold text-ink-400">Approach</p>
+						<p class="text-sm text-ink-200">{project.data.approach}</p>
+					</div>
+					<div class="rounded-2xl border border-white/5 bg-surface-3/70 p-4">
+						<p class="text-sm font-semibold text-ink-400">Impact</p>
+						<p class="text-sm text-ink-200">{project.data.impact}</p>
+						{project.data.metrics && (
+							<ul class="mt-2 grid gap-1 text-xs text-ink-300">
+								{project.data.metrics.map((metric) => (
+									<li>• {metric}</li>
+								))}
+							</ul>
+						)}
+					</div>
+				</div>
+				<div class="mt-4 flex flex-wrap gap-2">
+					{project.data.tech.map((tech) => (
+						<span class="pill text-xs text-ink-050">{tech}</span>
+					))}
+				</div>
+			</article>
+		))}
+	</section>
+
+	<section class="mt-10 flex flex-col gap-3">
+		<h3 class="text-xl font-semibold text-ink-050">Looking for a partner?</h3>
+		<p class="text-ink-300">
+			Let&apos;s design your next migration or ship the integration your customers keep asking for.
+		</p>
+		<a
+			class="accent-gradient inline-flex w-fit rounded-full px-5 py-3 text-sm font-semibold text-ink-900 shadow-lg shadow-amber/30 transition hover:-translate-y-1"
+			href={site.linkedin}
+			target="_blank"
+			rel="noreferrer"
+		>
+			Book via LinkedIn
+		</a>
+	</section>
+</BaseLayout>

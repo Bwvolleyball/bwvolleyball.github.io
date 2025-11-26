@@ -1,0 +1,10 @@
+{
+  "title": "Schwab Internal OSS Starters",
+  "slug": "schwab-starters",
+  "summary": "Launched Spring Boot starter kits and integration automation to speed teams onto cloud patterns.",
+  "problem": "Teams duplicated effort building service foundations and cloud integrations, slowing adoption and consistency.",
+  "approach": "Built Spring Cloud starter templates, codified Eureka/Config/Gateway wiring, and added an event-driven automation framework for integrations.",
+  "impact": "Faster bootstrap, consistent platform patterns, and recognition in company code-a-thon.",
+  "metrics": ["2nd place in company code-a-thon", "New services adopted standard starters with reduced setup time"],
+  "tech": ["Spring Boot", "Spring Cloud", "Microservices", "Automation"]
+}

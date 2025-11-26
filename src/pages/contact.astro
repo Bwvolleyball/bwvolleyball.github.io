@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../config/site';
+---
+
+<BaseLayout title="Contact | Brandon Ward" description="Reach out via LinkedIn for collaborations, mentoring, or speaking.">
+	<section class="flex flex-col gap-2">
+		<p class="text-sm font-semibold text-ink-500">Contact</p>
+		<h1 class="text-4xl font-semibold text-ink-050">No forms—just LinkedIn.</h1>
+		<p class="max-w-3xl text-ink-300">
+			If you want to collaborate on integrations, delivery acceleration, or team mentorship, message
+			me on LinkedIn.
+		</p>
+	</section>
+
+	<section class="mt-10 glass rounded-3xl border border-white/10 p-6">
+		<div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+			<div>
+				<p class="text-sm font-semibold text-ink-500">LinkedIn</p>
+				<h2 class="text-2xl font-semibold text-ink-050">Brandon Ward</h2>
+				<p class="text-ink-300">Senior Software Engineer · StackHawk</p>
+			</div>
+			<a
+				class="accent-gradient inline-flex w-fit rounded-full px-6 py-3 text-sm font-semibold text-ink-900 shadow-lg shadow-amber/30 transition hover:-translate-y-1"
+				href={site.linkedin}
+				target="_blank"
+				rel="noreferrer"
+			>
+				Connect on LinkedIn
+			</a>
+		</div>
+	</section>
+</BaseLayout>

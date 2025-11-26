@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../config/site';
+import { getCollection } from 'astro:content';
+
+const talks = await getCollection('speaking');
+---
+
+<BaseLayout title="Speaking & Workshops | Brandon Ward" description="Talks, panels, and workshops on delivery, integrations, and platform reliability.">
+	<section class="flex flex-col gap-2">
+		<p class="text-sm font-semibold text-ink-500">Speaking</p>
+		<h1 class="text-4xl font-semibold text-ink-050">Talks & workshops</h1>
+		<p class="max-w-3xl text-ink-300">
+			I speak about CI/CD guardrails, integration patterns, and building teams that can ship safely.
+			Book via LinkedIn for meetups, panels, or team workshops.
+		</p>
+	</section>
+
+	<section class="mt-10">
+		{talks.length === 0 ? (
+			<div class="glass rounded-3xl border border-white/10 p-6">
+				<p class="text-lg font-semibold text-ink-050">Talks coming soon</p>
+				<p class="text-ink-300">
+					Want me to cover delivery playbooks, Kubernetes migrations, or integration strategies?
+					Reach out and we&apos;ll tailor a session for your team or community.
+				</p>
+			</div>
+		) : (
+			<div class="grid gap-4">
+				{talks.map((talk) => (
+					<article class="glass rounded-2xl border border-white/10 p-5">
+						<div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+							<h2 class="text-xl font-semibold text-ink-050">{talk.data.title}</h2>
+							<p class="pill text-xs text-ink-050">
+								<span class="pill-dot"></span>
+								{talk.data.date}
+							</p>
+						</div>
+						<p class="text-sm text-ink-400">{talk.data.event} · {talk.data.location}</p>
+						{talk.data.tags && (
+							<div class="mt-3 flex flex-wrap gap-2">
+								{talk.data.tags.map((tag) => (
+									<span class="pill text-xs text-ink-050">{tag}</span>
+								))}
+							</div>
+						)}
+						{talk.data.link && (
+							<a class="mt-3 inline-flex text-sm font-semibold text-amber" href={talk.data.link} target="_blank" rel="noreferrer">
+								View details →
+							</a>
+						)}
+					</article>
+				))}
+			</div>
+		)}
+	</section>
+
+	<section class="mt-10 flex flex-col gap-3">
+		<h3 class="text-xl font-semibold text-ink-050">Book a session</h3>
+		<p class="text-ink-300">
+			Invite me to speak on delivery, integrations, or platform reliability. I focus on practical
+			playbooks your teams can adopt immediately.
+		</p>
+		<a
+			class="accent-gradient inline-flex w-fit rounded-full px-5 py-3 text-sm font-semibold text-ink-900 shadow-lg shadow-amber/30 transition hover:-translate-y-1"
+			href={site.linkedin}
+			target="_blank"
+			rel="noreferrer"
+		>
+			Book via LinkedIn
+		</a>
+	</section>
+</BaseLayout>
