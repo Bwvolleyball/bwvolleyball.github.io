@@ -4,7 +4,6 @@ export const site = {
 		'Senior Software Engineer at StackHawk delivering integrations, reliable platforms, and teams that ship with confidence.',
 	url: 'https://bwvolleyball.github.io',
 	linkedin: 'https://www.linkedin.com/in/bwvolleyball/',
-	resume: 'https://www.linkedin.com/in/bwvolleyball/',
 	location: 'Denver, CO',
 	role: 'Senior Software Engineer @ StackHawk',
 };

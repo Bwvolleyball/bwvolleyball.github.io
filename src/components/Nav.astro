@@ -30,7 +30,9 @@ const currentPath = Astro.url.pathname;
 				return (
 					<a
 						class={`rounded-full px-3 py-2 transition hover:text-ink-050 ${
-							isActive ? 'bg-ink-900/30 text-ink-050' : ''
+							isActive
+								? 'border border-amber/50 bg-ink-900/40 text-ink-050 shadow-[0_0_0_4px_rgba(247,174,59,0.15)]'
+								: 'hover:bg-ink-900/10'
 						}`}
 						href={link.href}
 					>
@@ -41,15 +43,7 @@ const currentPath = Astro.url.pathname;
 		</nav>
 		<div class="flex items-center gap-2">
 			<a
-				class="hidden rounded-full border border-white/10 px-3 py-2 text-sm font-semibold text-ink-050 transition hover:border-white/30 hover:text-white sm:inline-flex"
-				href={site.resume}
-				target="_blank"
-				rel="noreferrer"
-			>
-				Résumé
-			</a>
-			<a
-				class="hidden rounded-full bg-gradient-to-r from-amber to-teal px-3 py-2 text-sm font-semibold text-ink-900 transition hover:opacity-90 md:inline-flex"
+				class="hidden accent-gradient rounded-full px-3 py-2 text-sm font-semibold text-ink-900 shadow-lg shadow-amber/30 transition hover:-translate-y-0.5 md:inline-flex"
 				href={site.linkedin}
 				target="_blank"
 				rel="noreferrer"

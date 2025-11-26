@@ -105,6 +105,7 @@ img {
 
 .accent-gradient {
 	background-image: var(--gradient-warm);
+	color: var(--color-ink-900);
 }
 
 .beam {
