@@ -20,7 +20,7 @@ const experiences = (await getCollection('experience')).sort(
 
 	<section class="mt-10 grid gap-4">
 		{experiences.map((item) => (
-			<article id={item.slug} class="glass rounded-3xl border border-white/10 p-6">
+			<article id={item.id} class="glass rounded-3xl border border-white/10 p-6">
 				<div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
 					<div>
 						<h2 class="text-xl font-semibold text-ink-050">
