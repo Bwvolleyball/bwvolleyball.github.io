@@ -1,13 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img">
-  <defs>
-    <linearGradient id="grad" x1="10" y1="8" x2="54" y2="56" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#F7AE3B"/>
-      <stop offset="0.5" stop-color="#38E3D2"/>
-      <stop offset="1" stop-color="#7BD4FF"/>
-    </linearGradient>
-  </defs>
-  <circle cx="32" cy="32" r="28" fill="url(#grad)"/>
-  <circle cx="32" cy="32" r="26" fill="#0B1016" opacity="0.55"/>
-  <path d="M18 14v34m0 0h12.5c7 0 10.7-4.5 10.7-9 0-4.5-3.7-9-10.7-9H18m0 0h11c6.5 0 9.7-3.8 9.7-7.8 0-4-3.2-7.8-9.7-7.8H18" stroke="#F6F7FB" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M29.5 30.5l5 15.5 4.5-11 4.5 11 5-16.5" stroke="#38E3D2" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" transform="translate(4 4)"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="brandon_ward">
+  <!-- Blueprint mark: a cobalt tile (accent #2B55D9) with a faint grid and "b_" from the brandon_ward wordmark. -->
+  <rect width="64" height="64" rx="8" fill="#2B55D9"/>
+  <path d="M16 0V64M32 0V64M48 0V64M0 16H64M0 32H64M0 48H64" stroke="#FFFFFF" stroke-opacity=".12" stroke-width="1"/>
+  <path d="M18 13V47M18 29H27A9 9 0 0 1 27 47H18M39 47H50" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="square" stroke-linejoin="miter"/>
 </svg>

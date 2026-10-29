@@ -1,0 +1,35 @@
+---
+draft: false
+title: "Release cadence acceleration"
+summary: "Overhauled CI/CD and environment readiness to shrink release cycles from quarterly to weekly."
+role: "Software Engineer → Senior Software Engineer"
+team: "Platform, architecture reviews"
+stack: "Kubernetes, Gradle, CI/CD, Spring Boot, Quality Gates"
+outcome: "Release cadence 12× (3 months → 1 week)"
+---
+
+I joined Promontory MortgagePath as a Software Engineer in May 2019, became a Senior Software Engineer in February 2021, and stayed through December 2021. The headline is the release cadence: from one release every three months to one every week.
+
+## Building the product
+
+As a Software Engineer I built event-sourced Spring Boot services with Axon, in Kotlin and Java. I evolved our REST and GraphQL APIs with backward compatibility, so consumers stayed safe as they changed. I also delivered enhancements to the Angular and TypeScript web app with our UX partners, and mentored teams on Spring, Java, and Kotlin best practices.
+
+## The problem: quarterly releases
+
+Three-month release cycles with brittle environments blocked rapid delivery and feedback.
+
+## What changed
+
+- Rebuilt the pipelines and tightened the promotion quality gates.
+- Uplifted the Kubernetes development clusters.
+- Standardized Gradle builds to remove drift, including leading migrations from Maven to Gradle with the Kotlin DSL.
+- Ran architecture reviews to align services with platform standards and reliability targets.
+
+## The result
+
+Teams moved from quarterly to weekly releases with higher confidence and predictable rollouts:
+
+- Release cadence improved 12× (3 months → 1 week).
+- Reduced environment drift and rollout incidents.
+
+That work, along with mentoring, earned me the Lightkeeper Award in Q1 2021. I wrote about the habits behind it in [Ship faster without breaking teams](/writing/delivery-cadence).

@@ -1,0 +1,29 @@
+---
+// One primary per page (the closing "Message me on LinkedIn →"); everything else is secondary or ghost.
+type Props = {
+	variant?: 'primary' | 'secondary' | 'ghost';
+	/** Renders a link instead of a button. */
+	href?: string;
+	/** Opens in a new tab with an ↗ glyph. */
+	external?: boolean;
+	class?: string;
+};
+const { variant = 'primary', href, external = false, class: className } = Astro.props;
+const label = (await Astro.slots.render('default')).trim();
+const endsInArrow = /[→↗]\s*$/.test(label);
+const cls = ['bw-btn', `bw-btn-${variant}`, className];
+---
+
+{
+	href ? (
+		<a class:list={cls} href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener' : undefined}>
+			<Fragment set:html={label} />
+			{external && !endsInArrow && <span class="bw-ext" aria-hidden="true">↗</span>}
+			{external && <span class="bw-sr"> (opens in a new tab)</span>}
+		</a>
+	) : (
+		<button type="button" class:list={cls}>
+			<Fragment set:html={label} />
+		</button>
+	)
+}

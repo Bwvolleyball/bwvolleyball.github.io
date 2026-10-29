@@ -1,0 +1,37 @@
+---
+import Visual from './Visual.astro';
+import { brandStyle, type Brand, type VisualKey } from '../lib/brand';
+
+// One employer in that company's own brand colors. The visual panel never contains words.
+type Props = {
+	brand: Brand;
+	company: string;
+	/** "Jan 2022 – Aug 2026" */
+	dates: string;
+	role: string;
+	summary: string;
+	label?: string;
+	/** Case-study link; shows "Read the story →". Omit until a story exists (Vanguard). */
+	href?: string;
+	visual?: VisualKey;
+	/** Heading level for the role: 3 under a section header (Home), 2 directly under the page title (Experience). */
+	level?: 2 | 3;
+};
+const { brand, company, dates, role, summary, label, href, visual, level = 3 } = Astro.props;
+const Heading = `h${level}` as 'h2' | 'h3';
+---
+
+<article class={`bw-xp bw-xp-${brand}`} style={brandStyle(brand)}>
+	<div class="bw-xp-in">
+		<div class="bw-xp-text">
+			<p class="bw-mono bw-xp-co">{company} · {dates}</p>
+			<Heading class="bw-xp-role">{role}</Heading>
+			<p class="bw-xp-sum">{summary}</p>
+			<div class="bw-xp-foot">
+				{label && <span class="bw-mono bw-xp-label">{label}</span>}
+				{href && <a class="bw-xp-link" href={href}>Read the story<span class="bw-sr">: {company}</span> →</a>}
+			</div>
+		</div>
+		<div class="bw-xp-vis"><Visual visual={visual} /></div>
+	</div>
+</article>

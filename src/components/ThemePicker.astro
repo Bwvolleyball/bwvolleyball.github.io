@@ -1,0 +1,35 @@
+---
+// System / Light / Dark as icons: a monitor, a starfighter, and a battle station (original line art).
+// Markup only: NavBar's script wires every .bw-theme on the page to one shared theme store.
+type Props = { /** Show the words beside the icons (the mobile menu has room). Otherwise they're for screen readers only. */ labels?: boolean };
+const { labels = false } = Astro.props;
+
+const CHOICES = [
+	{ value: 'system', label: 'System', icon: '<rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M12 16v4M8.5 20h7"/>' },
+	{
+		value: 'light',
+		label: 'Light',
+		icon: '<path d="M12 3l2 7 6 5v2.5l-6-2-.5 3.5h-3l-.5-3.5-6 2V15l6-5z"/><path d="M4 11.5V15M20 11.5V15"/>',
+	},
+	{ value: 'dark', label: 'Dark', icon: '<circle cx="12" cy="12" r="9"/><path d="M3.2 12.8h17.6"/><circle cx="15" cy="8" r="2.4"/>' },
+] as const;
+---
+
+<div class:list={['bw-theme', !labels && 'bw-theme-icons']} role="radiogroup" aria-label="Color theme">
+	{
+		CHOICES.map(({ value, label, icon }) => (
+			<button
+				type="button"
+				role="radio"
+				class:list={['bw-theme-opt', value === 'system' && 'bw-on']}
+				aria-checked={value === 'system' ? 'true' : 'false'}
+				tabindex={value === 'system' ? 0 : -1}
+				title={labels ? undefined : `${label} theme`}
+				data-theme-choice={value}
+			>
+				<svg class="bw-theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={icon} />
+				<span class:list={[!labels && 'bw-sr']}>{label}</span>
+			</button>
+		))
+	}
+</div>

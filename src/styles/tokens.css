@@ -1,0 +1,70 @@
+/* Design tokens, copied value for value from personal-brand-design/project/tokens.json. Light on :root, dark on :root[data-theme="dark"]. */
+:root {
+	color-scheme: light;
+	--surface: #F3F5F8;
+	--panel: #E6EBF1;
+	--panel-raised: #FFFFFF;
+	--ink: #0F1720;
+	--ink-muted: #4B5866;
+	--line: #D3DAE3;
+	--accent: #2B55D9;
+	--on-accent: #FFFFFF;
+	--focus: #2B55D9;
+	--grid: rgba(43,85,217,.06);
+
+	/* Brand cards: the same in both themes. */
+	--brand-vanguard-fill-from: #C20029;
+	--brand-vanguard-fill-to: #96151D;
+	--brand-vanguard-on: #FFFFFF;
+	--brand-vanguard-coin: #FFAD00;
+	--brand-stackhawk-fill: #191927;
+	--brand-stackhawk-on: #F8F7FF;
+	--brand-stackhawk-accent: #00CBC6;
+	--brand-stackhawk-finding: #FF6A4F;
+	--brand-promontory-fill: #0B4C69;
+	--brand-promontory-on: #FFFFFF;
+	--brand-promontory-accent: #5FD0EC;
+	--brand-zenplanner-fill: #AF272F;
+	--brand-zenplanner-on: #FFFFFF;
+	--brand-zenplanner-accent: #FFFFFF;
+	--brand-schwab-fill: #00A1E1;
+	--brand-schwab-on: #002838;
+	--brand-schwab-accent: #002838;
+
+	--font-sans: "IBM Plex Sans", system-ui, sans-serif;
+	--font-mono: "IBM Plex Mono", ui-monospace, monospace;
+	--space-1: 4px;
+	--space-2: 8px;
+	--space-3: 12px;
+	--space-4: 16px;
+	--space-5: 24px;
+	--space-6: 32px;
+	--space-7: 48px;
+	--space-8: 72px;
+	--radius-sm: 2px;
+	--radius-md: 4px;
+	--radius-full: 999px;
+	--grid-size: 32px;
+	--measure: 68ch;
+	--page-max: 1120px;
+	--tap-target: 44px;
+	--xp-visual: 170px;
+	--loop-slow: 4.8s;
+	--loop-mid: 3.2s;
+	--count-step-fast: 140ms;
+	--count-step-slow: 380ms;
+}
+
+:root[data-theme="dark"] {
+	color-scheme: dark;
+	--surface: #0A0F15;
+	--panel: #111A24;
+	--panel-raised: #162130;
+	--ink: #E6EDF3;
+	--ink-muted: #9AA8B6;
+	--line: #1F2A36;
+	--accent: #86A3FF;
+	--on-accent: #0A0F15;
+	--focus: #86A3FF;
+	--grid: rgba(134,163,255,.07);
+}

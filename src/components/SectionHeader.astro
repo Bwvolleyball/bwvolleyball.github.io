@@ -1,0 +1,10 @@
+---
+// A section title with an optional mono section number. Numbers are for the home page only. Slot "aside" is right-aligned.
+type Props = { number?: string; title: string };
+const { number, title } = Astro.props;
+---
+
+<div class="bw-sec">
+	<h2 class="bw-sec-title">{number && <span class="bw-sec-num">{number}</span>}{title}</h2>
+	{Astro.slots.has('aside') && <span class="bw-sec-aside"><slot name="aside" /></span>}
+</div>

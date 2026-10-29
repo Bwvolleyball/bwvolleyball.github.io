@@ -1,34 +1,48 @@
 ---
 import Meta from '../components/Meta.astro';
-import Nav from '../components/Nav.astro';
+import NavBar from '../components/NavBar.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../config/site';
-import '../styles/globals.css';
+import '../styles/fonts.css';
+import '../styles/tokens.css';
+import '../styles/brand.css';
 
 type Props = {
 	title?: string;
 	description?: string;
-	showHeroPadding?: boolean;
+	/** Marks the matching nav link as the current page. */
+	current?: 'experience' | 'writing' | 'about';
 };
 
-const { title = site.title, description = site.description } = Astro.props as Props;
+const { title = site.title, description = site.description, current } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- Pre-paint theme (design system theme contract): runs before any stylesheet so the first paint is right. -->
+		<script is:inline>
+			(function () {
+				var c = 'system';
+				try { c = localStorage.getItem('bw-theme') || 'system'; } catch (e) {}
+				var dark = c === 'dark' || (c !== 'light' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
+				document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+			})();
+		</script>
 		<Meta title={title} description={description} />
 	</head>
-	<body class="relative bg-surface text-ink-050">
-		<div class="beam" aria-hidden="true"></div>
-		<div class="grid-overlay" aria-hidden="true"></div>
-		<a href="#main" class="sr-only focus:not-sr-only focus:ring-2 focus:ring-amber focus:outline-none">
-			Skip to content
-		</a>
-		<Nav />
-		<main id="main" class="mx-auto max-w-6xl px-6 pb-16 pt-12 lg:px-8 lg:pt-16">
-			<slot />
-		</main>
-		<Footer />
+	<body>
+		<a class="bw-skip" href="#main">Skip to content</a>
+		<div class="bw-page bw-grid">
+			<div class="bw-page-in">
+				<NavBar current={current} />
+				<main id="main" class="bw-page-main" tabindex="-1">
+					<slot />
+				</main>
+				<Footer />
+			</div>
+		</div>
 	</body>
 </html>

@@ -1,0 +1,49 @@
+---
+// One row on the About page: dates in a fixed mono column, then the role in 600 weight · company.
+// Place inside <ol class="bw-tl-list">, newest first. The resume details (location, points, stack, links) are optional.
+type Props = {
+	/** "Jan 2022 – Aug 2026"; empty for undated entries. */
+	when: string;
+	role: string;
+	company: string;
+	location?: string;
+	/** Awards, apps, or a description, as one muted line. */
+	note?: string;
+	points?: string[];
+	stack?: string[];
+	links?: { label: string; href: string }[];
+};
+const { when, role, company, location, note, points = [], stack = [], links = [] } = Astro.props;
+---
+
+<li class="bw-tl">
+	<span class="bw-mono bw-tl-when">{when}</span>
+	<span class="bw-tl-what">
+		<span class="bw-tl-head"><span class="bw-tl-role">{role}</span><span class="bw-tl-co"> · {company}</span></span>
+		{location && <span class="bw-tl-note">{location}</span>}
+		{note && <span class="bw-tl-note">{note}</span>}
+		{
+			points.length > 0 && (
+				<ul class="bw-tl-points">
+					{points.map((p) => (
+						<li>{p}</li>
+					))}
+				</ul>
+			)
+		}
+		{stack.length > 0 && <span class="bw-tl-stack">{stack.join(' · ')}</span>}
+		{
+			links.length > 0 && (
+				<span class="bw-tl-links">
+					{links.map((l) => (
+						<a href={l.href} target="_blank" rel="noopener">
+							{l.label}
+							<span aria-hidden="true"> ↗</span>
+							<span class="bw-sr"> (opens in a new tab)</span>
+						</a>
+					))}
+				</span>
+			)
+		}
+	</span>
+</li>

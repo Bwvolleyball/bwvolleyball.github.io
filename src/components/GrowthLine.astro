@@ -1,0 +1,22 @@
+---
+import { uniqueId } from '../lib/brand';
+
+// Vanguard: a line climbs, the area under it fades in, and it lands on a gold coin. Pure SVG/CSS.
+const line = 'M4 104 L50 92 L90 98 L130 74 L170 80 L210 52 L250 40 L282 22';
+const fade = uniqueId('bw-growth-fade');
+---
+
+<svg class="bw-motion bw-growth" viewBox="0 0 300 120" role="img" aria-label="Growth chart">
+	<defs>
+		<linearGradient id={fade} x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0" stop-color="currentColor" stop-opacity="0.35"></stop>
+			<stop offset="1" stop-color="currentColor" stop-opacity="0"></stop>
+		</linearGradient>
+	</defs>
+	<path class="bw-growth-area" fill={`url(#${fade})`} d={`${line} L282 120 L4 120Z`}></path>
+	<path class="bw-growth-line" d={line}></path>
+	<g class="bw-growth-coin">
+		<circle cx="282" cy="22" r="15"></circle>
+		<text x="282" y="28" text-anchor="middle">$</text>
+	</g>
+</svg>

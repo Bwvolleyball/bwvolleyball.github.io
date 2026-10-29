@@ -1,0 +1,18 @@
+---
+import GrowthLine from './GrowthLine.astro';
+import ScanSweep from './ScanSweep.astro';
+import CountUpBars from './CountUpBars.astro';
+import MigrationArrow from './MigrationArrow.astro';
+import AwardMedals from './AwardMedals.astro';
+import type { VisualKey } from '../lib/brand';
+
+// Maps a visual key to its card visual (the design system's BrandonWard.VISUALS).
+type Props = { visual?: VisualKey };
+const { visual } = Astro.props;
+---
+
+{visual === 'growth' && <GrowthLine />}
+{visual === 'scan' && <ScanSweep />}
+{visual === 'cadence' && <CountUpBars />}
+{visual === 'migration' && <MigrationArrow />}
+{visual === 'awards' && <AwardMedals count={5} label="Five company awards" />}

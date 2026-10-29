@@ -1,0 +1,10 @@
+---
+// The title block at the top of Experience, Writing, and About (the bundle's PageTitle).
+type Props = { title: string; sub?: string };
+const { title, sub } = Astro.props;
+---
+
+<div class="bw-page-head">
+	<h1 class="bw-page-title">{title}</h1>
+	{sub && <p class="bw-page-sub">{sub}</p>}
+</div>

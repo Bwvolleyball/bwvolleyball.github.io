@@ -1,0 +1,154 @@
+---
+import { Image } from 'astro:assets';
+import ThemePicker from './ThemePicker.astro';
+import photo from '../assets/brandon-ward.jpg';
+import { uniqueId } from '../lib/brand';
+
+type Props = { current?: 'experience' | 'writing' | 'about' };
+const { current } = Astro.props;
+
+// Each link gets a small line icon in the ThemePicker's style; the word stays.
+const links = [
+	{
+		key: 'experience',
+		label: 'Experience',
+		href: '/experience',
+		icon: '<rect x="3" y="7" width="18" height="13" rx="1.5"/><path d="M8.5 7V5.5A1.5 1.5 0 0 1 10 4h4a1.5 1.5 0 0 1 1.5 1.5V7M3 12.5h18"/>',
+	},
+	{ key: 'writing', label: 'Writing', href: '/writing', icon: '<path d="M12 21l-5-9 5-9 5 9z"/><path d="M12 12v3.5M9 21h6"/><circle cx="12" cy="11" r="1"/>' },
+	{ key: 'about', label: 'About', href: '/about', icon: '<circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/>' },
+];
+const panelId = uniqueId('bw-nav-panel');
+---
+
+<header class="bw-nav" data-nav>
+	<div class="bw-nav-bar">
+		<a class="bw-nav-mark" href="/">
+			<Image class="bw-nav-avatar" src={photo} alt="" width={36} height={36} densities={[1, 2, 3]} format="webp" loading="eager" />
+			<span class="bw-nav-id">
+				<span class="bw-nav-name">Brandon Ward</span>
+				<span class="bw-nav-handle">in/bwvolleyball</span>
+			</span>
+		</a>
+		<nav class="bw-nav-wide" aria-label="Main">
+			<ul class="bw-nav-links">
+				{
+					links.map((l) => (
+						<li>
+							<a href={l.href} class:list={['bw-nav-link', l.key === current && 'bw-on']} aria-current={l.key === current ? 'page' : undefined}>
+								<svg class="bw-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={l.icon} />
+								{l.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+			<ThemePicker />
+		</nav>
+		<button type="button" class="bw-nav-menu" aria-expanded="false" aria-controls={panelId} data-nav-menu>Menu</button>
+	</div>
+	<nav id={panelId} class="bw-nav-panel" aria-label="Main" hidden data-nav-panel>
+		<ul class="bw-nav-panel-links">
+			{
+				links.map((l) => (
+					<li>
+						<a href={l.href} class:list={['bw-nav-link', l.key === current && 'bw-on']} aria-current={l.key === current ? 'page' : undefined}>
+							<svg class="bw-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={l.icon} />
+							{l.label}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+		<ThemePicker labels />
+	</nav>
+</header>
+
+<!--
+	The page's single theme store (the design system's createThemeStore). Inline and synchronous, right after both
+	pickers, so they show the stored choice before first paint. Only this store follows prefers-color-scheme.
+-->
+<script is:inline>
+	(function () {
+		var KEY = 'bw-theme', CHOICES = ['system', 'light', 'dark'];
+		var root = document.documentElement;
+		var mql = null;
+		try { mql = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null; } catch (e) {}
+
+		function read() {
+			try { var v = localStorage.getItem(KEY); return CHOICES.indexOf(v) > -1 ? v : 'system'; } catch (e) { return 'system'; }
+		}
+		function save(c) {
+			try { if (c === 'system') localStorage.removeItem(KEY); else localStorage.setItem(KEY, c); } catch (e) { /* storage blocked: lasts for this page only */ }
+		}
+		function resolve() {
+			root.dataset.theme = choice === 'light' || choice === 'dark' ? choice : (mql && mql.matches ? 'dark' : 'light');
+		}
+		function follow(on) {
+			if (!mql || !mql.addEventListener) return;
+			if (on) mql.addEventListener('change', resolve); else mql.removeEventListener('change', resolve);
+		}
+
+		var choice = read();
+		var pickers = Array.prototype.slice.call(document.querySelectorAll('.bw-theme'));
+		function render() {
+			pickers.forEach(function (p) {
+				p.querySelectorAll('[data-theme-choice]').forEach(function (b) {
+					var on = b.getAttribute('data-theme-choice') === choice;
+					b.classList.toggle('bw-on', on);
+					b.setAttribute('aria-checked', on ? 'true' : 'false');
+					b.tabIndex = on ? 0 : -1;
+				});
+			});
+		}
+		function set(c) {
+			if (CHOICES.indexOf(c) < 0) return;
+			follow(false);
+			choice = c; save(c); resolve();
+			follow(c === 'system');
+			render();
+		}
+
+		pickers.forEach(function (p) {
+			p.addEventListener('click', function (e) {
+				var b = e.target.closest('[data-theme-choice]');
+				if (b) set(b.getAttribute('data-theme-choice'));
+			});
+			p.addEventListener('keydown', function (e) {
+				var i = CHOICES.indexOf(choice), n = CHOICES.length, next = null;
+				if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = CHOICES[(i + 1) % n];
+				if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = CHOICES[(i + n - 1) % n];
+				if (!next) return;
+				e.preventDefault();
+				set(next);
+				p.querySelector('[data-theme-choice="' + next + '"]').focus();
+			});
+		});
+
+		resolve();
+		follow(choice === 'system');
+		render();
+	})();
+</script>
+
+<script>
+	// Mobile menu: below 720px of the nav's width, the Menu button opens the panel. Escape closes it and returns focus.
+	document.querySelectorAll<HTMLElement>('[data-nav]').forEach((nav) => {
+		const button = nav.querySelector<HTMLButtonElement>('[data-nav-menu]');
+		const panel = nav.querySelector<HTMLElement>('[data-nav-panel]');
+		if (!button || !panel) return;
+		const setOpen = (open: boolean) => {
+			button.setAttribute('aria-expanded', String(open));
+			button.textContent = open ? 'Close' : 'Menu';
+			panel.hidden = !open;
+			panel.classList.toggle('bw-open', open);
+		};
+		button.addEventListener('click', () => setOpen(button.getAttribute('aria-expanded') !== 'true'));
+		nav.addEventListener('keydown', (e) => {
+			if (e.key !== 'Escape' || button.getAttribute('aria-expanded') !== 'true') return;
+			e.preventDefault();
+			setOpen(false);
+			button.focus();
+		});
+	});
+</script>

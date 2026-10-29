@@ -1,0 +1,16 @@
+---
+import TopicTag from './TopicTag.astro';
+import TypeLabel from './TypeLabel.astro';
+import DateLabel from './DateLabel.astro';
+import type { WritingEntry } from '../lib/brand';
+
+// Topic (the only colored part), type, then date.
+type Props = { entry: WritingEntry };
+const { entry } = Astro.props;
+---
+
+<div class="bw-meta">
+	<TopicTag topic={entry.topic} />
+	<TypeLabel type={entry.type} />
+	<DateLabel date={entry.date} />
+</div>

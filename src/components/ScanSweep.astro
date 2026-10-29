@@ -1,0 +1,10 @@
+---
+// StackHawk: a teal scan bar passes over a 14×6 grid of app cells; seven light coral as findings. Pure CSS.
+const FINDINGS = [9, 23, 30, 47, 58, 71, 80];
+const cells = Array.from({ length: 6 * 14 }, (_, i) => ({ col: i % 14, finding: FINDINGS.includes(i) }));
+---
+
+<div class="bw-motion bw-scan" role="img" aria-label="Security scan">
+	<div class="bw-scan-grid">{cells.map((c) => <i class:list={[c.finding && 'bw-f']} style={`--c: ${c.col}`} />)}</div>
+	<div class="bw-scan-bar"></div>
+</div>

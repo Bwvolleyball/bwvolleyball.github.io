@@ -1,0 +1,51 @@
+---
+import Visual from './Visual.astro';
+import { brandStyle, type Brand, type VisualKey } from '../lib/brand';
+
+// The brand band continues the card the reader clicked; the quiet spec sheet answers the vetting questions.
+type Props = {
+	brand: Brand;
+	company: string;
+	dates: string;
+	/** The story's title (the page h1). */
+	title: string;
+	role?: string;
+	team?: string;
+	stack?: string;
+	outcome?: string;
+	visual?: VisualKey;
+	/** Shows "Draft · for Brandon to edit" on the band. */
+	draft?: boolean;
+};
+const { brand, company, dates, title, visual, draft = false } = Astro.props;
+const SPEC = [
+	['role', 'Role'],
+	['team', 'Team'],
+	['stack', 'Stack'],
+	['outcome', 'Outcome'],
+] as const;
+const rows = SPEC.filter(([key]) => Astro.props[key]).map(([key, label]) => ({ key, label, value: Astro.props[key] as string }));
+---
+
+<header class="bw-cs">
+	<div class="bw-cs-band" style={brandStyle(brand)}>
+		<div class="bw-cs-in">
+			<div>
+				<p class="bw-mono bw-xp-co">{company} · {dates}</p>
+				<h1 class="bw-cs-title">{title}</h1>
+				{draft && <p class="bw-mono bw-cs-draft">Draft · for Brandon to edit</p>}
+			</div>
+			{visual && <div class="bw-xp-vis"><Visual visual={visual} /></div>}
+		</div>
+	</div>
+	<dl class="bw-cs-spec">
+		{
+			rows.map((r) => (
+				<div class="bw-cs-row">
+					<dt class="bw-mono">{r.label}</dt>
+					<dd class:list={[r.key === 'outcome' && 'bw-cs-outcome']}>{r.value}</dd>
+				</div>
+			))
+		}
+	</dl>
+</header>

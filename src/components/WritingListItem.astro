@@ -1,0 +1,15 @@
+---
+import EntryMeta from './EntryMeta.astro';
+import EntryLink from './EntryLink.astro';
+import type { WritingEntry } from '../lib/brand';
+
+type Props = { entry: WritingEntry; level?: 2 | 3 };
+const { entry, level = 3 } = Astro.props;
+const Heading = `h${level}` as 'h2' | 'h3';
+---
+
+<li class="bw-wi">
+	{entry.flagship && <span class="bw-mono bw-flag">Start here</span>}
+	<EntryMeta entry={entry} />
+	<Heading class="bw-wi-title"><EntryLink entry={entry} /></Heading>
+</li>

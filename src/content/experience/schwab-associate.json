@@ -10,6 +10,17 @@
     "Led legacy → Spring Boot microservice migrations on PCF.",
     "Enhanced full-stack financial planning apps (Java, Struts, Spring, JS) consuming REST/SOAP."
   ],
-  "stacks": ["Java", "Spring Boot", "Struts", "PCF", "REST", "SOAP", "TDD"],
-  "awards": ["Key Contributor (2016)"]
+  "stacks": [
+    "Java",
+    "Spring Boot",
+    "Struts",
+    "PCF",
+    "REST",
+    "SOAP",
+    "TDD"
+  ],
+  "awards": [
+    "Key Contributor (2016)"
+  ],
+  "note": "Key Contributor 2016"
 }

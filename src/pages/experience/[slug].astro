@@ -1,0 +1,43 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CaseStudyHeader from '../../components/CaseStudyHeader.astro';
+import Prose from '../../components/Prose.astro';
+import ClosingCTA from '../../components/ClosingCTA.astro';
+import { getCards } from '../../lib/content';
+
+export async function getStaticPaths() {
+	const cards = await getCards();
+	const studies = await getCollection('caseStudies');
+	return studies.map((study) => {
+		const card = cards.find((c) => c.story === study.id);
+		if (!card) throw new Error(`Case study "${study.id}" has no experience card whose story is "${study.id}".`);
+		return { params: { slug: study.id }, props: { study, card } };
+	});
+}
+
+const { study, card } = Astro.props;
+const { Content } = await render(study);
+const { data } = study;
+---
+
+<BaseLayout title={`${data.title} · ${card.company} | Brandon Ward`} description={data.summary} current="experience">
+	<CaseStudyHeader
+		brand={card.brand}
+		company={card.company}
+		dates={card.dates}
+		visual={card.visual}
+		title={data.title}
+		role={data.role}
+		team={data.team}
+		stack={data.stack}
+		outcome={data.outcome}
+		draft={data.draft}
+	/>
+	<section class="bw-page-sec">
+		<Prose>
+			<Content />
+		</Prose>
+	</section>
+	<ClosingCTA />
+</BaseLayout>

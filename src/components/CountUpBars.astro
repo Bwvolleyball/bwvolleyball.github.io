@@ -1,0 +1,14 @@
+---
+// Promontory: 12× counts up while twelve release bars light. Rendered at its final frame; the script animates it.
+type Props = { max?: number; suffix?: string; label?: string };
+const { max = 12, suffix = '×', label = `Release cadence: ${max} times faster` } = Astro.props;
+---
+
+<div class="bw-motion bw-cadence" role="img" aria-label={label} data-countup={max} data-countup-suffix={suffix} data-countup-step="count-step-fast">
+	<span class="bw-metric" aria-hidden="true" data-countup-value>{max}{suffix}</span>
+	<div class="bw-cadence-bars" aria-hidden="true">{Array.from({ length: max }, () => <i class="bw-on" data-countup-item />)}</div>
+</div>
+
+<script>
+	import '../scripts/count-up';
+</script>

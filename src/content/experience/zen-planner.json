@@ -9,5 +9,21 @@
     "Improved CI/CD with custom git hooks and Jenkins pipelines for faster feedback.",
     "Mentored teams on Spring Boot and Java patterns."
   ],
-  "stacks": ["Java", "Spring Boot", "Kubernetes", "AWS", "Jenkins", "CI/CD"]
+  "stacks": [
+    "Java",
+    "Spring Boot",
+    "Kubernetes",
+    "AWS",
+    "Jenkins",
+    "CI/CD"
+  ],
+  "card": {
+    "brand": "zenplanner",
+    "role": "Software Engineer",
+    "dates": "Nov 2018 – May 2019",
+    "summary": "Moved apps from EC2 to Kubernetes on AWS; custom git hooks and Jenkins pipelines.",
+    "label": "EC2 → Kubernetes",
+    "visual": "migration",
+    "story": "zen-planner"
+  }
 }

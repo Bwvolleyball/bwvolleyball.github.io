@@ -1,0 +1,74 @@
+---
+import TopicTag from './TopicTag.astro';
+import WritingFeature from './WritingFeature.astro';
+import WritingListItem from './WritingListItem.astro';
+import { TOPICS, TOPIC_KEYS, filterByTopic, splitFeatured, type Topic, type WritingEntry } from '../lib/brand';
+
+// The featured piece beside a compact list, newest first. With `filterable`, Cloud / Mobile / Architecture toggles
+// switch between views rendered here at build time, so the script only shows and hides them.
+type Props = { entries: WritingEntry[]; filterable?: boolean; level?: 2 | 3 };
+const { entries, filterable = false, level = 3 } = Astro.props;
+const showFilter = filterable && entries.length > 0;
+
+const count = (n: number) => `${n} ${n === 1 ? 'piece' : 'pieces'}`;
+const topics: (Topic | null)[] = [null, ...(showFilter ? TOPIC_KEYS : [])];
+const views = topics.map((topic) => {
+	const shown = filterByTopic(entries, topic);
+	const announce = !topic ? `Showing all ${count(shown.length)}` : shown.length ? `Showing ${count(shown.length)} on ${TOPICS[topic]}` : `Nothing on ${TOPICS[topic]} yet.`;
+	return { topic, announce, ...splitFeatured(shown) };
+});
+---
+
+<div class="bw-writing" data-writing>
+	{
+		showFilter && (
+			<div class="bw-wfilter" role="group" aria-label="Filter by topic">
+				{TOPIC_KEYS.map((t) => <TopicTag topic={t} toggle />)}
+			</div>
+		)
+	}
+	{
+		views.map(({ topic, announce, featured, rest }) => (
+			<div data-view={topic ?? 'all'} data-announce={announce} hidden={topic !== null}>
+				{!entries.length ? (
+					<p class="bw-wempty">New writing is on the way.</p>
+				) : !featured ? (
+					<p class="bw-wempty">Nothing on {topic && TOPICS[topic]} yet.</p>
+				) : (
+					<div class:list={['bw-wl', !rest.length && 'bw-wl-solo']}>
+						<WritingFeature entry={featured} level={level} />
+						{rest.length > 0 && (
+							<ul class="bw-wl-list">
+								{rest.map((e) => <WritingListItem entry={e} level={level} />)}
+							</ul>
+						)}
+					</div>
+				)}
+			</div>
+		))
+	}
+	{showFilter && <p class="bw-sr" aria-live="polite" data-writing-status></p>}
+</div>
+
+<script>
+	// Topic filter: one topic at a time; clicking the active one clears it. Results are announced politely.
+	document.querySelectorAll<HTMLElement>('[data-writing]').forEach((root) => {
+		const buttons = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-topic]'));
+		const views = Array.from(root.querySelectorAll<HTMLElement>('[data-view]'));
+		const status = root.querySelector<HTMLElement>('[data-writing-status]');
+		let topic: string | null = null;
+		buttons.forEach((b) =>
+			b.addEventListener('click', () => {
+				topic = topic === b.dataset.topic ? null : (b.dataset.topic ?? null);
+				buttons.forEach((x) => {
+					const on = x.dataset.topic === topic;
+					x.classList.toggle('bw-on', on);
+					x.setAttribute('aria-pressed', String(on));
+				});
+				const key = topic ?? 'all';
+				views.forEach((v) => (v.hidden = v.dataset.view !== key));
+				if (status) status.textContent = views.find((v) => v.dataset.view === key)?.dataset.announce ?? '';
+			}),
+		);
+	});
+</script>
