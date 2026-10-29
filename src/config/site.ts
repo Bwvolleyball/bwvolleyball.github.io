@@ -1,5 +1,5 @@
 export const site = {
-	title: 'Brandon Ward | Product Architect',
+	title: 'Brandon Ward | Software Architect',
 	description:
 		'Product Architect for Vanguard Personalized Indexing. Twelve years building fintech and security platforms at Schwab, StackHawk, and Vanguard.',
 	url: 'https://madewithpixels.xyz',
