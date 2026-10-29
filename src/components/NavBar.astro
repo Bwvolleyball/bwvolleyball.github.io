@@ -1,0 +1,138 @@
+---
+import ThemePicker from './ThemePicker.astro';
+import { uniqueId } from '../lib/brand';
+
+type Props = { current?: 'experience' | 'writing' | 'about' };
+const { current } = Astro.props;
+
+const links = [
+	{ key: 'experience', label: 'Experience', href: '/experience' },
+	{ key: 'writing', label: 'Writing', href: '/writing' },
+	{ key: 'about', label: 'About', href: '/about' },
+];
+const panelId = uniqueId('bw-nav-panel');
+---
+
+<header class="bw-nav" data-nav>
+	<div class="bw-nav-bar">
+		<a class="bw-nav-mark" href="/">brandon_ward</a>
+		<nav class="bw-nav-wide" aria-label="Main">
+			<ul class="bw-nav-links">
+				{
+					links.map((l) => (
+						<li>
+							<a href={l.href} class:list={['bw-nav-link', l.key === current && 'bw-on']} aria-current={l.key === current ? 'page' : undefined}>
+								{l.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+			<ThemePicker />
+		</nav>
+		<button type="button" class="bw-nav-menu" aria-expanded="false" aria-controls={panelId} data-nav-menu>Menu</button>
+	</div>
+	<nav id={panelId} class="bw-nav-panel" aria-label="Main" hidden data-nav-panel>
+		<ul class="bw-nav-panel-links">
+			{
+				links.map((l) => (
+					<li>
+						<a href={l.href} class:list={['bw-nav-link', l.key === current && 'bw-on']} aria-current={l.key === current ? 'page' : undefined}>
+							{l.label}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+		<ThemePicker />
+	</nav>
+</header>
+
+<!--
+	The page's single theme store (the design system's createThemeStore). Inline and synchronous, right after both
+	pickers, so they show the stored choice before first paint. Only this store follows prefers-color-scheme.
+-->
+<script is:inline>
+	(function () {
+		var KEY = 'bw-theme', CHOICES = ['system', 'light', 'dark'];
+		var root = document.documentElement;
+		var mql = null;
+		try { mql = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null; } catch (e) {}
+
+		function read() {
+			try { var v = localStorage.getItem(KEY); return CHOICES.indexOf(v) > -1 ? v : 'system'; } catch (e) { return 'system'; }
+		}
+		function save(c) {
+			try { if (c === 'system') localStorage.removeItem(KEY); else localStorage.setItem(KEY, c); } catch (e) { /* storage blocked: lasts for this page only */ }
+		}
+		function resolve() {
+			root.dataset.theme = choice === 'light' || choice === 'dark' ? choice : (mql && mql.matches ? 'dark' : 'light');
+		}
+		function follow(on) {
+			if (!mql || !mql.addEventListener) return;
+			if (on) mql.addEventListener('change', resolve); else mql.removeEventListener('change', resolve);
+		}
+
+		var choice = read();
+		var pickers = Array.prototype.slice.call(document.querySelectorAll('.bw-theme'));
+		function render() {
+			pickers.forEach(function (p) {
+				p.querySelectorAll('[data-theme-choice]').forEach(function (b) {
+					var on = b.getAttribute('data-theme-choice') === choice;
+					b.classList.toggle('bw-on', on);
+					b.setAttribute('aria-checked', on ? 'true' : 'false');
+					b.tabIndex = on ? 0 : -1;
+				});
+			});
+		}
+		function set(c) {
+			if (CHOICES.indexOf(c) < 0) return;
+			follow(false);
+			choice = c; save(c); resolve();
+			follow(c === 'system');
+			render();
+		}
+
+		pickers.forEach(function (p) {
+			p.addEventListener('click', function (e) {
+				var b = e.target.closest('[data-theme-choice]');
+				if (b) set(b.getAttribute('data-theme-choice'));
+			});
+			p.addEventListener('keydown', function (e) {
+				var i = CHOICES.indexOf(choice), n = CHOICES.length, next = null;
+				if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = CHOICES[(i + 1) % n];
+				if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = CHOICES[(i + n - 1) % n];
+				if (!next) return;
+				e.preventDefault();
+				set(next);
+				p.querySelector('[data-theme-choice="' + next + '"]').focus();
+			});
+		});
+
+		resolve();
+		follow(choice === 'system');
+		render();
+	})();
+</script>
+
+<script>
+	// Mobile menu: below 720px of the nav's width, the Menu button opens the panel. Escape closes it and returns focus.
+	document.querySelectorAll<HTMLElement>('[data-nav]').forEach((nav) => {
+		const button = nav.querySelector<HTMLButtonElement>('[data-nav-menu]');
+		const panel = nav.querySelector<HTMLElement>('[data-nav-panel]');
+		if (!button || !panel) return;
+		const setOpen = (open: boolean) => {
+			button.setAttribute('aria-expanded', String(open));
+			button.textContent = open ? 'Close' : 'Menu';
+			panel.hidden = !open;
+			panel.classList.toggle('bw-open', open);
+		};
+		button.addEventListener('click', () => setOpen(button.getAttribute('aria-expanded') !== 'true'));
+		nav.addEventListener('keydown', (e) => {
+			if (e.key !== 'Escape' || button.getAttribute('aria-expanded') !== 'true') return;
+			e.preventDefault();
+			setOpen(false);
+			button.focus();
+		});
+	});
+</script>

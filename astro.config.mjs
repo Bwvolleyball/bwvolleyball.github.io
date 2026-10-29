@@ -2,12 +2,12 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
 	site: 'https://bwvolleyball.github.io',
 	integrations: [mdx(), sitemap()],
-	vite: {
-		plugins: [tailwindcss()],
+	markdown: {
+		// Code blocks use the design's Prose styles (Plex Mono on panel), not a fixed-color highlighter theme.
+		syntaxHighlight: false,
 	},
 });

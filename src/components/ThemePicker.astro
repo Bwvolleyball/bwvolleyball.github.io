@@ -1,0 +1,25 @@
+---
+// System / Light / Dark. Markup only: NavBar's script wires every .bw-theme on the page to one shared theme store.
+const CHOICES = [
+	['system', 'System'],
+	['light', 'Light'],
+	['dark', 'Dark'],
+] as const;
+---
+
+<div class="bw-theme" role="radiogroup" aria-label="Color theme">
+	{
+		CHOICES.map(([value, label]) => (
+			<button
+				type="button"
+				role="radio"
+				class:list={['bw-theme-opt', value === 'system' && 'bw-on']}
+				aria-checked={value === 'system' ? 'true' : 'false'}
+				tabindex={value === 'system' ? 0 : -1}
+				data-theme-choice={value}
+			>
+				{label}
+			</button>
+		))
+	}
+</div>
