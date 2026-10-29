@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import ThemePicker from './ThemePicker.astro';
+import photo from '../assets/brandon-ward.jpg';
 import { uniqueId } from '../lib/brand';
 
 type Props = { current?: 'experience' | 'writing' | 'about' };
@@ -21,7 +23,13 @@ const panelId = uniqueId('bw-nav-panel');
 
 <header class="bw-nav" data-nav>
 	<div class="bw-nav-bar">
-		<a class="bw-nav-mark" href="/">brandon_ward</a>
+		<a class="bw-nav-mark" href="/">
+			<Image class="bw-nav-avatar" src={photo} alt="" width={36} height={36} densities={[1, 2, 3]} format="webp" loading="eager" />
+			<span class="bw-nav-id">
+				<span class="bw-nav-name">Brandon Ward</span>
+				<span class="bw-nav-handle">in/bwvolleyball</span>
+			</span>
+		</a>
 		<nav class="bw-nav-wide" aria-label="Main">
 			<ul class="bw-nav-links">
 				{
