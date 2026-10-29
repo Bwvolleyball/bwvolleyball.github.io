@@ -10,6 +10,26 @@
     "Uplifted Kubernetes development clusters; CI/CD + release cadence accelerated from 3 months to 1 week.",
     "Led Maven → Gradle (Kotlin DSL) migrations and team mentoring across Spring/Kotlin/Java."
   ],
-  "stacks": ["Kotlin", "Java", "Spring Boot", "Gradle", "Kubernetes", "CI/CD", "Architecture"],
-  "awards": ["Lightkeeper Award (Q1 2021)"]
+  "stacks": [
+    "Kotlin",
+    "Java",
+    "Spring Boot",
+    "Gradle",
+    "Kubernetes",
+    "CI/CD",
+    "Architecture"
+  ],
+  "awards": [
+    "Lightkeeper Award (Q1 2021)"
+  ],
+  "card": {
+    "brand": "promontory",
+    "role": "Software Engineer → Senior Software Engineer",
+    "dates": "May 2019 – Dec 2021",
+    "summary": "Release cycles cut from quarterly to weekly; Lightkeeper Award, Q1 2021.",
+    "label": "Release cadence",
+    "visual": "cadence",
+    "story": "promontory"
+  },
+  "note": "Lightkeeper Award, Q1 2021"
 }

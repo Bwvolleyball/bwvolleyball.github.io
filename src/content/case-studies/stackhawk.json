@@ -1,0 +1,12 @@
+{
+  "draft": true,
+  "title": "Owning the security-testing platform",
+  "role": "Senior Software Engineer, Platform",
+  "team": "Platform engineering, end to end",
+  "stack": "Kotlin, Spring Boot, gRPC, REST, Argo, Kubernetes, Gradle, GitHub Actions, React",
+  "outcome": "A platform scaled, extended and shipped across scanning, test plugins, scan metrics and integrations",
+  "problem": "StackHawk's customers needed security testing that kept pace with how fast they ship: more kinds of tests, results they could act on, and hooks into the tools they already use, on a platform that had to keep scaling.",
+  "approach": "Scaled and extended the platform end to end. Built Kotlin/Spring Boot services exposing REST and gRPC for scanning workflows; added new types of testing plugins; reworked how scan results and metrics are presented; delivered integrations with GitHub, Snyk, Azure DevOps and more on Argo Workflows with hardened rollouts; built custom Gradle plugins and moved CI/CD to GitHub Actions with guardrails; modernized the React app's state layer.",
+  "impact": "A broader, faster platform that customers could fit into their existing SDLC, and engineers mentored across Kotlin, Gradle, Spring Boot, Kubernetes and iterative delivery.",
+  "metrics": []
+}

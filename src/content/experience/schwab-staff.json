@@ -10,6 +10,27 @@
     "Architected distributed microservices and an event-driven integration automation framework.",
     "Placed 2nd in company code-a-thon with Spring Boot starters."
   ],
-  "stacks": ["Java", "Spring Boot", "Spring Cloud", "Microservices", "Gateway", "Automation"],
-  "awards": ["Key Contributor (2017)", "Tech Services Champion (Q4 2017)", "Mad Skillz (Q4 2017)"]
+  "stacks": [
+    "Java",
+    "Spring Boot",
+    "Spring Cloud",
+    "Microservices",
+    "Gateway",
+    "Automation"
+  ],
+  "awards": [
+    "Key Contributor (2017)",
+    "Tech Services Champion (Q4 2017)",
+    "Mad Skillz (Q4 2017)"
+  ],
+  "card": {
+    "brand": "schwab",
+    "role": "Intern → Associate → Staff Software Applications Engineer",
+    "dates": "Jun 2014 – Nov 2018",
+    "summary": "Spring Cloud integrations and an event-driven automation framework.",
+    "label": "Company awards",
+    "visual": "awards",
+    "story": "schwab"
+  },
+  "note": "Key Contributor 2017 · Tech Services Champion Q4 2017 · Mad Skillz Q4 2017"
 }
