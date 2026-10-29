@@ -15,4 +15,4 @@ const { visual } = Astro.props;
 {visual === 'scan' && <ScanSweep />}
 {visual === 'cadence' && <CountUpBars />}
 {visual === 'migration' && <MigrationArrow />}
-{visual === 'awards' && <AwardMedals />}
+{visual === 'awards' && <AwardMedals count={5} label="Five company awards" />}
