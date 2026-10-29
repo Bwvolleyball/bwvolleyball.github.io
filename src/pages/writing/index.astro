@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHead from '../../components/PageHead.astro';
+import WritingList from '../../components/WritingList.astro';
+import ClosingCTA from '../../components/ClosingCTA.astro';
+import { getWriting } from '../../lib/content';
+
+const sub = 'Essays and talks on cloud development, mobile development and technical architecture.';
+const entries = await getWriting();
+---
+
+<BaseLayout title="Writing | Brandon Ward" description={sub} current="writing">
+	<div>
+		<PageHead title="Writing" sub={sub} />
+	</div>
+	<section class="bw-page-sec">
+		<WritingList entries={entries} filterable level={2} />
+	</section>
+	<ClosingCTA />
+</BaseLayout>

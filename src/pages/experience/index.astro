@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHead from '../../components/PageHead.astro';
+import ExperienceCard from '../../components/ExperienceCard.astro';
+import ClosingCTA from '../../components/ClosingCTA.astro';
+import { getCards } from '../../lib/content';
+
+const cards = await getCards();
+---
+
+<BaseLayout title="Experience | Brandon Ward" description="Vanguard, StackHawk, Promontory MortgagePath, Zen Planner and Charles Schwab, newest first." current="experience">
+	<div>
+		<PageHead title="Experience" sub="Each company in its own colors, newest first. The full timeline is on About." />
+	</div>
+	<section class="bw-page-sec">
+		<div class="bw-xp-stack">
+			{cards.map((c) => <ExperienceCard {...c} level={2} />)}
+		</div>
+	</section>
+	<ClosingCTA />
+</BaseLayout>

@@ -1,0 +1,55 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CaseStudyHeader from '../../components/CaseStudyHeader.astro';
+import Prose from '../../components/Prose.astro';
+import ClosingCTA from '../../components/ClosingCTA.astro';
+import { getCards } from '../../lib/content';
+
+export async function getStaticPaths() {
+	const cards = await getCards();
+	const studies = await getCollection('caseStudies');
+	return studies.map((study) => {
+		const card = cards.find((c) => c.story === study.id);
+		if (!card) throw new Error(`Case study "${study.id}" has no experience card whose story is "${study.id}".`);
+		return { params: { slug: study.id }, props: { study: study.data, card } };
+	});
+}
+
+const { study, card } = Astro.props;
+---
+
+<BaseLayout title={`${study.title} · ${card.company} | Brandon Ward`} description={study.summary ?? card.summary} current="experience">
+	<CaseStudyHeader
+		brand={card.brand}
+		company={card.company}
+		dates={card.dates}
+		visual={card.visual}
+		title={study.title}
+		role={study.role}
+		team={study.team}
+		stack={study.stack}
+		outcome={study.outcome}
+		draft={study.draft}
+	/>
+	<section class="bw-page-sec">
+		<Prose>
+			<h2>Problem</h2>
+			<p>{study.problem}</p>
+			<h2>Approach</h2>
+			<p>{study.approach}</p>
+			<h2>Impact</h2>
+			<p>{study.impact}</p>
+			{
+				study.metrics.length > 0 && (
+					<ul>
+						{study.metrics.map((m) => (
+							<li>{m}</li>
+						))}
+					</ul>
+				)
+			}
+		</Prose>
+	</section>
+	<ClosingCTA />
+</BaseLayout>
