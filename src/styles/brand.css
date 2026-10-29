@@ -13,11 +13,10 @@ body { margin: 0; background: var(--surface); color: var(--ink); font-family: va
 }
 .bw-reduce .bw-motion, .bw-reduce .bw-motion * { animation: none !important; transition: none !important; }
 
-/* ThemePicker */
-.bw-theme { display: inline-flex; align-self: flex-start; gap: 2px; padding: 2px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); }
-.bw-theme-opt { font: 500 13px/1 var(--font-sans); color: var(--ink-muted); background: transparent; border: 0; border-radius: var(--radius-sm); padding: 0 10px; min-height: 30px; cursor: pointer; }
-.bw-theme-opt:hover { color: var(--ink); }
-.bw-theme-opt.bw-on { background: var(--panel-raised); color: var(--ink); box-shadow: 0 0 0 1px var(--line); }
+/* ThemePicker: one button that cycles System → Light → Dark */
+.bw-theme { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); align-self: flex-start; font: 500 14px/1 var(--font-sans); color: var(--ink-muted); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 0 var(--space-3); min-height: 36px; cursor: pointer; }
+.bw-theme:hover { color: var(--ink); border-color: var(--ink-muted); }
+.bw-theme-icons { width: 36px; padding: 0; }
 
 /* Button: primary (cobalt), secondary (outlined), ghost (text) */
 .bw-btn { font: 600 14px/1 var(--font-sans); display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: var(--tap-target); padding: 0 var(--space-5); border-radius: var(--radius-sm); border: 1px solid transparent; cursor: pointer; text-decoration: none; white-space: nowrap; }
@@ -41,8 +40,13 @@ body { margin: 0; background: var(--surface); color: var(--ink); font-family: va
 .bw-sec-num { font-family: var(--font-mono); font-size: 13px; font-weight: 500; color: var(--accent); margin-right: var(--space-3); vertical-align: 2px; }
 .bw-sec-aside { font-size: 14px; color: var(--ink-muted); }
 
-/* NavBar: links + ThemePicker; below 720px of its own width, a Menu button opens a panel */
-.bw-nav { container-type: inline-size; border-bottom: 1px solid var(--line); }
+/* NavBar: links + ThemePicker; below 720px of its own width, a Menu button opens a panel. Sticky and full-bleed:
+   it slides away while scrolling down (.bw-nav-away) and gets a shadow once the page moves under it (.bw-nav-stuck). */
+.bw-nav { container-type: inline-size; position: sticky; top: 0; z-index: 5; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 90%, transparent); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: transform .22s ease, box-shadow .22s ease; }
+.bw-nav-stuck { box-shadow: 0 6px 18px -12px rgba(15, 23, 32, .35); }
+.bw-nav-away { transform: translateY(-100%); box-shadow: none; }
+.bw-nav-in { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--space-7); }
+@media (prefers-reduced-motion: reduce) { .bw-nav { transition: none; } }
 .bw-nav-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--space-5); min-height: 64px; }
 .bw-nav-mark { font-family: var(--font-mono); font-weight: 500; font-size: 14px; color: var(--ink); text-decoration: none; }
 .bw-nav-wide { display: flex; align-items: center; gap: var(--space-6); }
@@ -55,7 +59,8 @@ body { margin: 0; background: var(--surface); color: var(--ink); font-family: va
 @container (max-width: 720px) {
   .bw-nav-wide { display: none; }
   .bw-nav-menu { display: inline-flex; align-items: center; }
-  .bw-nav-panel.bw-open { display: flex; flex-direction: column; gap: var(--space-4); padding: var(--space-2) 0 var(--space-5); }
+  .bw-nav-in { padding: 0 var(--space-4); }
+  .bw-nav-panel.bw-open { display: flex; flex-direction: column; gap: var(--space-4); padding: var(--space-2) 0 var(--space-5); max-height: calc(100dvh - 65px); overflow-y: auto; overscroll-behavior: contain; }
   .bw-nav-panel-links { flex-direction: column; gap: 0; }
   .bw-nav-panel-links .bw-nav-link { font-size: 18px; width: 100%; border-top: 1px solid var(--line); }
 }
@@ -173,6 +178,10 @@ body { margin: 0; background: var(--surface); color: var(--ink); font-family: va
 .bw-prose pre { font-family: var(--font-mono); font-size: 14px; line-height: 1.6; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius-md); padding: var(--space-4) var(--space-5); overflow-x: auto; white-space: pre; }
 .bw-prose pre code { background: none; padding: 0; font-size: inherit; }
 .bw-prose hr { border: 0; border-top: 1px solid var(--line); }
+.bw-prose img, .bw-prose video { display: block; max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--panel-raised); }
+.bw-prose table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.5; display: block; overflow-x: auto; }
+.bw-prose th, .bw-prose td { text-align: left; padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--line); }
+.bw-prose th { font-weight: 600; border-bottom-color: var(--ink-muted); }
 
 /* CaseStudyHeader: a brand band, then a quiet spec sheet */
 .bw-cs { container-type: inline-size; display: flex; flex-direction: column; gap: var(--space-5); }
@@ -213,16 +222,33 @@ body { margin: 0; background: var(--surface); color: var(--ink); font-family: va
 .bw-quiet:hover { text-decoration: underline; text-underline-offset: 3px; }
 .bw-article { display: flex; flex-direction: column; gap: var(--space-5); }
 .bw-article-head { display: flex; flex-direction: column; gap: var(--space-3); max-width: var(--measure); }
+.bw-article-orig { margin: 0; font-size: 14px; color: var(--ink-muted); }
+.bw-article-orig a { color: var(--accent); text-underline-offset: 3px; }
+/* About: the bio beside the headshot; the photo moves above the bio on narrow pages */
+.bw-about-intro { display: grid; grid-template-columns: minmax(0, var(--measure)) 240px; align-items: start; gap: var(--space-7); }
+.bw-about-intro .bw-prose { grid-row: 1; grid-column: 1; }
+.bw-about-photo { grid-column: 2; grid-row: 1; display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-md); box-shadow: 0 0 0 1px var(--line); background: var(--panel); }
+
+/* 404 */
+.bw-nf { display: flex; flex-direction: column; gap: var(--space-5); padding: var(--space-6) 0; }
+.bw-nf-code { margin: 0; color: var(--accent); overflow-wrap: anywhere; }
+.bw-nf-near { display: flex; flex-direction: column; gap: var(--space-2); }
+.bw-nf-near h2 { margin: 0; }
+.bw-nf-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); }
+.bw-nf-list a { display: inline-flex; align-items: center; min-height: var(--tap-target); font-weight: 500; color: var(--accent); text-underline-offset: 3px; }
 @container (max-width: 720px) {
   .bw-page-in { padding: 0 var(--space-4); }
   .bw-page-main { gap: var(--space-7); padding-bottom: var(--space-7); }
   .bw-page-sec { gap: var(--space-5); }
+  .bw-about-intro { grid-template-columns: minmax(0, 1fr); gap: var(--space-5); }
+  .bw-about-intro .bw-prose, .bw-about-photo { grid-column: 1; grid-row: auto; }
+  .bw-about-photo { width: 160px; }
   .bw-page-title { font-size: 32px; }
   .bw-page-sub { font-size: 16px; }
 }
 
 /* ---------- Site additions (not in the gallery bundle) ---------- */
-html { background: var(--surface); }
+html { background: var(--surface); scroll-padding-top: 80px; }
 .bw-page { min-height: 100vh; }
 
 /* Visually hidden text for screen readers, e.g. "(opens in a new tab)". */
@@ -233,13 +259,12 @@ html { background: var(--surface); }
 .bw-skip:focus { transform: none; }
 
 /* Hit areas: compact controls keep their drawn size but get a hit area at least tap-target tall. */
-.bw-theme-opt, .bw-tag-btn, .bw-nav-menu { position: relative; }
-.bw-theme-opt::after, .bw-tag-btn::after, .bw-nav-menu::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: max(100%, var(--tap-target)); transform: translateY(-50%); }
+.bw-theme, .bw-tag-btn, .bw-nav-menu { position: relative; }
+.bw-theme::after, .bw-tag-btn::after, .bw-nav-menu::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: max(100%, var(--tap-target)); transform: translateY(-50%); }
 
 /* ThemePicker icons: in the bar they stand alone (words for screen readers, tooltip on hover) in square segments. */
-.bw-theme-opt { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); }
-.bw-theme-icon { width: 16px; height: 16px; flex: none; }
-.bw-theme-icons .bw-theme-opt { min-width: var(--tap-target); padding: 0; }
+.bw-theme-icon { width: 18px; height: 18px; flex: none; }
+.bw-theme-icon[hidden] { display: none; }
 
 /* NavBar icons: a small line icon before each link's word. */
 .bw-nav-link { gap: var(--space-2); }

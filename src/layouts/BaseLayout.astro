@@ -12,9 +12,11 @@ type Props = {
 	description?: string;
 	/** Marks the matching nav link as the current page. */
 	current?: 'experience' | 'writing' | 'about';
+	/** Keep the page out of search results (the 404). */
+	noindex?: boolean;
 };
 
-const { title = site.title, description = site.description, current } = Astro.props;
+const { title = site.title, description = site.description, current, noindex = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -31,13 +33,13 @@ const { title = site.title, description = site.description, current } = Astro.pr
 				document.documentElement.dataset.theme = dark ? 'dark' : 'light';
 			})();
 		</script>
-		<Meta title={title} description={description} />
+		<Meta title={title} description={description} noindex={noindex} />
 	</head>
 	<body>
 		<a class="bw-skip" href="#main">Skip to content</a>
 		<div class="bw-page bw-grid">
+			<NavBar current={current} />
 			<div class="bw-page-in">
-				<NavBar current={current} />
 				<main id="main" class="bw-page-main" tabindex="-1">
 					<slot />
 				</main>

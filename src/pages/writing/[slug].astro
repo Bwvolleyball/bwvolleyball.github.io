@@ -23,6 +23,13 @@ const entry = { ...post.data, date: post.data.published, href: `/writing/${post.
 			<EntryMeta entry={entry} />
 			<h1 class="bw-page-title">{entry.title}</h1>
 			{entry.summary && <p class="bw-page-sub">{entry.summary}</p>}
+			{
+				entry.original && (
+					<p class="bw-article-orig">
+						First published on the <a href={entry.original.url}>{entry.original.publisher}</a>.
+					</p>
+				)
+			}
 		</div>
 		<Prose>
 			<Content />

@@ -1,7 +1,8 @@
 ---
-// System / Light / Dark as icons: a monitor, a starfighter, and a battle station (original line art).
-// Markup only: NavBar's script wires every .bw-theme on the page to one shared theme store.
-type Props = { /** Show the words beside the icons (the mobile menu has room). Otherwise they're for screen readers only. */ labels?: boolean };
+// One button that cycles System → Light → Dark. Its icon is the current choice: a monitor, a starfighter, or a
+// battle station (original line art). Markup only: NavBar's script wires every .bw-theme on the page to one shared
+// theme store, and swaps the icon, the word, and the label as the choice changes.
+type Props = { /** Show the word beside the icon (the mobile menu has room). Otherwise it's for screen readers only. */ labels?: boolean };
 const { labels = false } = Astro.props;
 
 const CHOICES = [
@@ -15,21 +16,29 @@ const CHOICES = [
 ] as const;
 ---
 
-<div class:list={['bw-theme', !labels && 'bw-theme-icons']} role="radiogroup" aria-label="Color theme">
+<button
+	type="button"
+	class:list={['bw-theme', !labels && 'bw-theme-icons']}
+	aria-label="Theme: System. Switch to Light."
+	title={labels ? undefined : 'Theme: System. Switch to Light.'}
+	data-theme-cycle
+>
 	{
-		CHOICES.map(({ value, label, icon }) => (
-			<button
-				type="button"
-				role="radio"
-				class:list={['bw-theme-opt', value === 'system' && 'bw-on']}
-				aria-checked={value === 'system' ? 'true' : 'false'}
-				tabindex={value === 'system' ? 0 : -1}
-				title={labels ? undefined : `${label} theme`}
-				data-theme-choice={value}
-			>
-				<svg class="bw-theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={icon} />
-				<span class:list={[!labels && 'bw-sr']}>{label}</span>
-			</button>
+		CHOICES.map(({ value, icon }) => (
+			<svg
+				class="bw-theme-icon"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="1.6"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				aria-hidden="true"
+				hidden={value !== 'system'}
+				data-theme-icon={value}
+				set:html={icon}
+			/>
 		))
 	}
-</div>
+	{labels && <span data-theme-word>Theme: System</span>}
+</button>

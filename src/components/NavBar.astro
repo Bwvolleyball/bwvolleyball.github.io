@@ -22,16 +22,34 @@ const panelId = uniqueId('bw-nav-panel');
 ---
 
 <header class="bw-nav" data-nav>
-	<div class="bw-nav-bar">
-		<a class="bw-nav-mark" href="/">
-			<Image class="bw-nav-avatar" src={photo} alt="" width={36} height={36} densities={[1, 2, 3]} format="webp" loading="eager" />
-			<span class="bw-nav-id">
-				<span class="bw-nav-name">Brandon Ward</span>
-				<span class="bw-nav-handle">in/bwvolleyball</span>
-			</span>
-		</a>
-		<nav class="bw-nav-wide" aria-label="Main">
-			<ul class="bw-nav-links">
+	<div class="bw-nav-in">
+		<div class="bw-nav-bar">
+			<a class="bw-nav-mark" href="/">
+				<Image class="bw-nav-avatar" src={photo} alt="" width={36} height={36} densities={[1, 2, 3]} format="webp" loading="eager" />
+				<span class="bw-nav-id">
+					<span class="bw-nav-name">Brandon Ward</span>
+					<span class="bw-nav-handle">in/bwvolleyball</span>
+				</span>
+			</a>
+			<nav class="bw-nav-wide" aria-label="Main">
+				<ul class="bw-nav-links">
+					{
+						links.map((l) => (
+							<li>
+								<a href={l.href} class:list={['bw-nav-link', l.key === current && 'bw-on']} aria-current={l.key === current ? 'page' : undefined}>
+									<svg class="bw-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={l.icon} />
+									{l.label}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+				<ThemePicker />
+			</nav>
+			<button type="button" class="bw-nav-menu" aria-expanded="false" aria-controls={panelId} data-nav-menu>Menu</button>
+		</div>
+		<nav id={panelId} class="bw-nav-panel" aria-label="Main" hidden data-nav-panel>
+			<ul class="bw-nav-panel-links">
 				{
 					links.map((l) => (
 						<li>
@@ -43,30 +61,14 @@ const panelId = uniqueId('bw-nav-panel');
 					))
 				}
 			</ul>
-			<ThemePicker />
+			<ThemePicker labels />
 		</nav>
-		<button type="button" class="bw-nav-menu" aria-expanded="false" aria-controls={panelId} data-nav-menu>Menu</button>
 	</div>
-	<nav id={panelId} class="bw-nav-panel" aria-label="Main" hidden data-nav-panel>
-		<ul class="bw-nav-panel-links">
-			{
-				links.map((l) => (
-					<li>
-						<a href={l.href} class:list={['bw-nav-link', l.key === current && 'bw-on']} aria-current={l.key === current ? 'page' : undefined}>
-							<svg class="bw-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={l.icon} />
-							{l.label}
-						</a>
-					</li>
-				))
-			}
-		</ul>
-		<ThemePicker labels />
-	</nav>
 </header>
 
 <!--
 	The page's single theme store (the design system's createThemeStore). Inline and synchronous, right after both
-	pickers, so they show the stored choice before first paint. Only this store follows prefers-color-scheme.
+	theme buttons, so they show the stored choice before first paint. Only this store follows prefers-color-scheme.
 -->
 <script is:inline>
 	(function () {
@@ -89,16 +91,20 @@ const panelId = uniqueId('bw-nav-panel');
 			if (on) mql.addEventListener('change', resolve); else mql.removeEventListener('change', resolve);
 		}
 
+		var LABELS = { system: 'System', light: 'Light', dark: 'Dark' };
 		var choice = read();
-		var pickers = Array.prototype.slice.call(document.querySelectorAll('.bw-theme'));
+		var buttons = Array.prototype.slice.call(document.querySelectorAll('[data-theme-cycle]'));
+		function nextOf(c) { return CHOICES[(CHOICES.indexOf(c) + 1) % CHOICES.length]; }
 		function render() {
-			pickers.forEach(function (p) {
-				p.querySelectorAll('[data-theme-choice]').forEach(function (b) {
-					var on = b.getAttribute('data-theme-choice') === choice;
-					b.classList.toggle('bw-on', on);
-					b.setAttribute('aria-checked', on ? 'true' : 'false');
-					b.tabIndex = on ? 0 : -1;
+			var label = 'Theme: ' + LABELS[choice] + '. Switch to ' + LABELS[nextOf(choice)] + '.';
+			buttons.forEach(function (b) {
+				b.querySelectorAll('[data-theme-icon]').forEach(function (i) {
+					if (i.getAttribute('data-theme-icon') === choice) i.removeAttribute('hidden'); else i.setAttribute('hidden', '');
 				});
+				var word = b.querySelector('[data-theme-word]');
+				if (word) word.textContent = 'Theme: ' + LABELS[choice];
+				b.setAttribute('aria-label', label);
+				if (b.hasAttribute('title')) b.setAttribute('title', label);
 			});
 		}
 		function set(c) {
@@ -109,20 +115,8 @@ const panelId = uniqueId('bw-nav-panel');
 			render();
 		}
 
-		pickers.forEach(function (p) {
-			p.addEventListener('click', function (e) {
-				var b = e.target.closest('[data-theme-choice]');
-				if (b) set(b.getAttribute('data-theme-choice'));
-			});
-			p.addEventListener('keydown', function (e) {
-				var i = CHOICES.indexOf(choice), n = CHOICES.length, next = null;
-				if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = CHOICES[(i + 1) % n];
-				if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = CHOICES[(i + n - 1) % n];
-				if (!next) return;
-				e.preventDefault();
-				set(next);
-				p.querySelector('[data-theme-choice="' + next + '"]').focus();
-			});
+		buttons.forEach(function (b) {
+			b.addEventListener('click', function () { set(nextOf(choice)); });
 		});
 
 		resolve();
@@ -132,23 +126,56 @@ const panelId = uniqueId('bw-nav-panel');
 </script>
 
 <script>
-	// Mobile menu: below 720px of the nav's width, the Menu button opens the panel. Escape closes it and returns focus.
+	// Mobile menu: below 720px of the nav's width, the Menu button opens the panel. Escape or a click outside closes it.
+	// Scrolling: the bar is sticky. It slides away while you scroll down the page and comes back as soon as you scroll
+	// up, and it stays put while the menu is open or a keyboard user is focused inside it.
 	document.querySelectorAll<HTMLElement>('[data-nav]').forEach((nav) => {
 		const button = nav.querySelector<HTMLButtonElement>('[data-nav-menu]');
 		const panel = nav.querySelector<HTMLElement>('[data-nav-panel]');
 		if (!button || !panel) return;
+		const isOpen = () => button.getAttribute('aria-expanded') === 'true';
 		const setOpen = (open: boolean) => {
 			button.setAttribute('aria-expanded', String(open));
 			button.textContent = open ? 'Close' : 'Menu';
 			panel.hidden = !open;
 			panel.classList.toggle('bw-open', open);
+			if (open) nav.classList.remove('bw-nav-away');
 		};
-		button.addEventListener('click', () => setOpen(button.getAttribute('aria-expanded') !== 'true'));
+		button.addEventListener('click', () => setOpen(!isOpen()));
 		nav.addEventListener('keydown', (e) => {
-			if (e.key !== 'Escape' || button.getAttribute('aria-expanded') !== 'true') return;
+			if (e.key !== 'Escape' || !isOpen()) return;
 			e.preventDefault();
 			setOpen(false);
 			button.focus();
 		});
+		document.addEventListener('click', (e) => {
+			if (isOpen() && !nav.contains(e.target as Node)) setOpen(false);
+		});
+
+		let lastY = window.scrollY;
+		let queued = false;
+		const update = () => {
+			queued = false;
+			const y = Math.max(window.scrollY, 0);
+			const delta = y - lastY;
+			nav.classList.toggle('bw-nav-stuck', y > 0);
+			if (y <= nav.offsetHeight || isOpen() || nav.matches(':has(:focus-visible)')) nav.classList.remove('bw-nav-away');
+			else if (delta > 6) nav.classList.add('bw-nav-away');
+			else if (delta < -6) nav.classList.remove('bw-nav-away');
+			if (Math.abs(delta) > 6) lastY = y;
+		};
+		window.addEventListener(
+			'scroll',
+			() => {
+				if (queued) return;
+				queued = true;
+				requestAnimationFrame(update);
+			},
+			{ passive: true },
+		);
+		nav.addEventListener('focusin', (e) => {
+			if ((e.target as HTMLElement).matches(':focus-visible')) nav.classList.remove('bw-nav-away');
+		});
+		update();
 	});
 </script>

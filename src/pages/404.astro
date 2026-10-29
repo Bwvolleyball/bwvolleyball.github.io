@@ -1,0 +1,94 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import { getCards, getLocalPosts } from '../lib/content';
+
+// GitHub Pages serves this file for every path it can't find, at that path, so everything here is absolute and the
+// script works from location.pathname. Every real page is listed below for the script to match against.
+const cards = await getCards();
+const studies = await getCollection('caseStudies');
+const posts = await getLocalPosts();
+const routes = [
+	{ path: '/', title: 'Home', keys: 'home index brandon ward' },
+	{ path: '/experience', title: 'Experience', keys: 'experience projects work resume' },
+	{ path: '/writing', title: 'Writing', keys: 'writing blog posts essays talks speaking' },
+	{ path: '/about', title: 'About', keys: 'about bio resume contact education' },
+	...studies.map((s) => ({
+		path: `/experience/${s.id}`,
+		title: `${s.data.title} · ${cards.find((c) => c.story === s.id)?.company ?? ''}`,
+		keys: s.id,
+	})),
+	// A StackHawk post also answers to its old slug there, for links that only swapped the domain.
+	...posts.map((p) => ({ path: `/writing/${p.id}`, title: p.data.title, keys: `${p.id} ${p.data.original?.url.split('/').filter(Boolean).pop() ?? ''}` })),
+];
+---
+
+<BaseLayout title="Page not found | Brandon Ward" description="That page doesn't exist on this site." noindex>
+	<section class="bw-nf">
+		<p class="bw-mono bw-nf-code">404 · <span data-nf-path>Not found</span></p>
+		<h1 class="bw-page-title">This page isn't on the blueprint.</h1>
+		<p class="bw-page-sub">The link may be old, or the address has a typo. Here's where things are now.</p>
+		<div class="bw-nf-near" data-nf-near hidden>
+			<h2 class="bw-cap">Closest match</h2>
+			<ul class="bw-nf-list" data-nf-list></ul>
+		</div>
+		<div class="bw-nf-near">
+			<h2 class="bw-cap">Everything else</h2>
+			<ul class="bw-nf-list">
+				{routes.slice(0, 4).map((r) => <li><a href={r.path}>{r.title}</a></li>)}
+			</ul>
+		</div>
+		<div>
+			<Button href="/" variant="secondary">← Back home</Button>
+		</div>
+	</section>
+</BaseLayout>
+
+<script is:inline define:vars={{ routes }}>
+	(function () {
+		var raw = location.pathname;
+		var shown = document.querySelector('[data-nf-path]');
+		if (shown) shown.textContent = decodeURIComponent(raw);
+		var norm = function (p) {
+			return decodeURIComponent(p).toLowerCase().replace(/\/index\.html?$|\.html?$/, '').replace(/\/+$/, '') || '/';
+		};
+		var path = norm(raw);
+		// Same page, different spelling (case, a trailing .html, a doubled slash): go straight there.
+		for (var i = 0; i < routes.length; i++) {
+			if (norm(routes[i].path) === path.replace(/\/{2,}/g, '/')) {
+				location.replace(routes[i].path + location.search + location.hash);
+				return;
+			}
+		}
+		// Filler and section names don't count: "/writing/the-x" should match on "x", not on every post.
+		var SKIP = ['the', 'and', 'for', 'our', 'your', 'you', 'with', 'in', 'of', 'to', 'a', 'an', 'do', 'blog', 'writing', 'experience', 'html'];
+		var words = function (s) {
+			return s.toLowerCase().split(/[^a-z0-9]+/).filter(function (w) { return w.length > 1 && SKIP.indexOf(w) < 0; });
+		};
+		var asked = words(path);
+		if (!asked.length) return;
+		var scored = routes
+			.map(function (r) {
+				var have = words(r.path + ' ' + r.keys);
+				var hits = asked.filter(function (w) {
+					return have.some(function (h) { return h === w || (w.length > 3 && (h.indexOf(w) === 0 || w.indexOf(h) === 0) && h.length > 3); });
+				}).length;
+				return { r: r, score: hits / asked.length };
+			})
+			.filter(function (x) { return x.score >= 0.5; })
+			.sort(function (a, b) { return b.score - a.score || b.r.path.length - a.r.path.length; })
+			.slice(0, 3);
+		if (!scored.length) return;
+		var list = document.querySelector('[data-nf-list]');
+		scored.forEach(function (x) {
+			var li = document.createElement('li');
+			var a = document.createElement('a');
+			a.href = x.r.path;
+			a.textContent = x.r.title;
+			li.appendChild(a);
+			list.appendChild(li);
+		});
+		document.querySelector('[data-nf-near]').hidden = false;
+	})();
+</script>
