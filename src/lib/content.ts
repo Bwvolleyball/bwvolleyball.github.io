@@ -6,14 +6,17 @@ type CardRole = Role & { data: Role['data'] & { card: NonNullable<Role['data']['
 
 const newestRoleFirst = (a: Role, b: Role) => monthKey(b.data.start) - monthKey(a.data.start);
 
-/** Every role, newest first, for the About timeline. */
+/** Every role, newest first, with its full resume details, for About. */
 export async function getTimeline() {
 	return (await getCollection('experience')).sort(newestRoleFirst).map(({ data }) => ({
-		start: data.start,
-		end: data.end,
+		when: `${data.start} – ${data.end}`,
 		role: data.role,
 		company: data.company,
-		note: data.note,
+		location: data.location,
+		// The short note (awards, apps) only when there are no bullets to say it.
+		note: data.highlights.length ? undefined : data.note,
+		points: data.highlights,
+		stack: data.stacks,
 	}));
 }
 

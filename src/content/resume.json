@@ -1,0 +1,48 @@
+{
+  "_source": "The public sections of linkedin.com/in/bwvolleyball, as of Oct 2026. Roles live in src/content/experience.",
+  "education": [
+    {
+      "school": "Regis University",
+      "degree": "Master's of Science in Software Engineering",
+      "start": "2016",
+      "end": "2019",
+      "note": "Graduated August 2019 with Honors. Final GPA of 4.0."
+    }
+  ],
+  "honors": [
+    { "title": "Promontory Lightkeeper Award", "issuer": "Promontory MortgagePath", "date": "Mar 2021", "note": "Awarded to a single individual contributor per quarter, to recognize excellence in helping the company achieve its goals." },
+    { "title": "Key Contributor Award", "issuer": "Charles Schwab", "date": "Nov 2018", "note": "Awarded to high performing individuals at Charles Schwab to recognize their dedication to excellence." },
+    { "title": "Schwab Technology Service Champion Award", "issuer": "Charles Schwab", "date": "Feb 2018", "note": "Awarded Quarterly across all of Schwab Technology Services to recognize individuals who are helping Schwab achieve their technical goals at the highest level" },
+    { "title": "Wealth Management Technology Mad Skillz Award", "issuer": "Charles Schwab", "date": "Dec 2017", "note": "Awarded quarterly to recognize individuals who have great technical skills and who are pushing the boundaries of what is possible for technology in the organization." },
+    { "title": "Key Contributor Award", "issuer": "Charles Schwab", "date": "Nov 2017", "note": "Awarded to high performing individuals at Charles Schwab to recognize their dedication to excellence." },
+    { "title": "Key Contributor Award", "issuer": "Charles Schwab", "date": "Nov 2016", "note": "Awarded to high performing individuals at Charles Schwab to recognize their dedication to excellence." },
+    { "title": "Alan Turing Award for Excellence in Computer Science", "issuer": "Regis University", "date": "May 2015", "note": "Each year, Regis University selects one student whom they feel has demonstrated excellence in computer science to receive this award." },
+    { "title": "Academic Achievement in Computer Science", "issuer": "Regis Jesuit High School", "date": "May 2011", "note": "Awarded to one senior each year for academic excellence in Computer Science." },
+    { "title": "Board of Trustee's Scholarship", "issuer": "Regis University", "note": "A prestigious scholarship awarded to top students for their four years at Regis University." },
+    { "title": "Dean's List", "issuer": "Regis University", "note": "Was named to the Dean's list for outstanding academic performance every semester during my enrollment at Regis University." },
+    { "title": "Dean's List", "issuer": "Regis Jesuit", "note": "Was named to the Dean's list every semester of my career at Regis Jesuit for academic excellence and maintaining a GPA above 3.5" },
+    { "title": "Honors Program Scholarship", "issuer": "Regis University - Honors Program", "note": "A scholarship awarded to a select few students in the Honors program at Regis University." }
+  ],
+  "certifications": [
+    { "title": "Spring: Framework In Depth", "issuer": "LinkedIn", "date": "Feb 2020" },
+    { "title": "Learning GraphQL", "issuer": "LinkedIn", "date": "Jul 2019" }
+  ],
+  "volunteering": [
+    {
+      "role": "Open Source Developer",
+      "org": "WebDollar",
+      "start": "Mar 2021",
+      "end": "Oct 2021",
+      "cause": "Economic Empowerment",
+      "points": [
+        "Provided enhancements to the CLI for the WebDollar miner / blockchain source code to allow for PoS mining with password protected wallets",
+        "Forked and maintain a mining container, kept up-to-date as the project transitions to 100% PoS",
+        "Assisted with the test net to prove out the migration from hybrid PoW / PoS to 100% PoS"
+      ],
+      "links": [
+        { "label": "webdollar/node-webdollar", "href": "https://github.com/webdollar/node-webdollar" },
+        { "label": "bwvolleyball/webdollar-miner-container", "href": "https://github.com/bwvolleyball/webdollar-miner-container" }
+      ]
+    }
+  ]
+}

@@ -245,3 +245,13 @@ html { background: var(--surface); }
 .bw-nav-link { gap: var(--space-2); }
 .bw-nav-icon { width: 16px; height: 16px; flex: none; }
 .bw-nav-panel-links .bw-nav-icon { width: 18px; height: 18px; }
+
+/* Full resume on About: TimelineRow details. */
+.bw-tl-what { display: flex; flex-direction: column; gap: var(--space-1); }
+.bw-tl-what > .bw-tl-note { display: block; }
+.bw-tl-points { margin: var(--space-2) 0 0; padding-left: 1.2em; list-style: square; font-size: 15px; line-height: 1.55; color: var(--ink); }
+.bw-tl-points li + li { margin-top: var(--space-1); }
+.bw-tl-points li::marker { color: var(--accent); }
+.bw-tl-stack { margin-top: var(--space-2); font-size: 14px; color: var(--ink-muted); }
+.bw-tl-links { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); margin-top: var(--space-2); font-size: 14px; }
+.bw-tl-links a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; overflow-wrap: anywhere; }

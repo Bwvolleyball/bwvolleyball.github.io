@@ -7,6 +7,7 @@ import SectionHeader from '../components/SectionHeader.astro';
 import TimelineRow from '../components/TimelineRow.astro';
 import ClosingCTA from '../components/ClosingCTA.astro';
 import { getTimeline } from '../lib/content';
+import resume from '../content/resume.json';
 
 const bio = await getEntry('about', 'bio');
 if (!bio) throw new Error('Missing src/content/about/bio.md');
@@ -14,7 +15,7 @@ const { Content } = await render(bio);
 const timeline = await getTimeline();
 ---
 
-<BaseLayout title="About | Brandon Ward" description="Brandon Ward: Product Architect for Vanguard Personalized Indexing, and the full career timeline." current="about">
+<BaseLayout title="About | Brandon Ward" description="Brandon Ward: Product Architect for Vanguard Personalized Indexing. The full resume: every role, education, honors, certifications and volunteering." current="about">
 	<div>
 		<PageHead title="About" />
 		{bio.data.draft && <p class="bw-mono bw-draft">Draft · for Brandon to edit</p>}
@@ -28,6 +29,30 @@ const timeline = await getTimeline();
 		<SectionHeader title="Career" />
 		<ol class="bw-tl-list">
 			{timeline.map((t) => <TimelineRow {...t} />)}
+		</ol>
+	</section>
+	<section class="bw-page-sec">
+		<SectionHeader title="Education" />
+		<ol class="bw-tl-list">
+			{resume.education.map((e) => <TimelineRow when={`${e.start} – ${e.end}`} role={e.degree} company={e.school} note={e.note} />)}
+		</ol>
+	</section>
+	<section class="bw-page-sec">
+		<SectionHeader title="Honors and awards" />
+		<ol class="bw-tl-list">
+			{resume.honors.map((h) => <TimelineRow when={h.date ?? ''} role={h.title} company={h.issuer} note={h.note} />)}
+		</ol>
+	</section>
+	<section class="bw-page-sec">
+		<SectionHeader title="Certifications" />
+		<ol class="bw-tl-list">
+			{resume.certifications.map((c) => <TimelineRow when={c.date} role={c.title} company={c.issuer} />)}
+		</ol>
+	</section>
+	<section class="bw-page-sec">
+		<SectionHeader title="Volunteering" />
+		<ol class="bw-tl-list">
+			{resume.volunteering.map((v) => <TimelineRow when={`${v.start} – ${v.end}`} role={v.role} company={v.org} note={v.cause} points={v.points} links={v.links} />)}
 		</ol>
 	</section>
 	<ClosingCTA />
