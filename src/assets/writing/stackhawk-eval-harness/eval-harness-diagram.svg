@@ -1,0 +1,105 @@
+<svg viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="teal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0EA5A5"/>
+      <stop offset="1" stop-color="#0B7A6E"/>
+    </linearGradient>
+    <linearGradient id="oldArm" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#94A3B8"/>
+      <stop offset="1" stop-color="#64748B"/>
+    </linearGradient>
+    <linearGradient id="newArm" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#14B8A6"/>
+      <stop offset="1" stop-color="#0D9488"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 Z" fill="#475569"/>
+    </marker>
+    <marker id="arrowLight" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 Z" fill="#94A3B8"/>
+    </marker>
+  </defs>
+
+  <style>
+    .lbl { fill:#1E293B; font-size:13px; font-weight:600; }
+    .sub { fill:#64748B; font-size:11px; }
+    .white { fill:#ffffff; }
+    .col-head { fill:#0B7A6E; font-size:12px; font-weight:700; letter-spacing:.04em; }
+    .line { stroke:#475569; stroke-width:1.6; fill:none; }
+    .line-l { stroke:#94A3B8; stroke-width:1.6; fill:none; }
+  </style>
+
+  <!-- Title -->
+  <text x="30" y="34" font-size="17" font-weight="700" fill="#0F172A">One variable, held constant everywhere else</text>
+  <text x="30" y="54" font-size="12" fill="#64748B">Same model. Same prompt. Three real repos. The only thing that changes is the skill version.</text>
+
+  <!-- Column headers -->
+  <text x="120" y="92" text-anchor="middle" class="col-head">FIXED PROMPT</text>
+  <text x="355" y="92" text-anchor="middle" class="col-head">TWO SKILL VERSIONS</text>
+  <text x="620" y="92" text-anchor="middle" class="col-head">THREE REAL REPOS</text>
+  <text x="880" y="92" text-anchor="middle" class="col-head">BLIND JUDGE</text>
+
+  <!-- Fixed prompt node -->
+  <rect x="40" y="220" width="160" height="86" rx="10" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="120" y="252" text-anchor="middle" class="lbl">Single instruction</text>
+  <text x="120" y="270" text-anchor="middle" class="lbl">prompt</text>
+  <text x="120" y="292" text-anchor="middle" class="sub">orient → explore → report</text>
+
+  <!-- OLD arm -->
+  <rect x="270" y="150" width="180" height="70" rx="10" fill="url(#oldArm)"/>
+  <text x="360" y="182" text-anchor="middle" class="white" font-size="14" font-weight="700">OLD  (v2.0)</text>
+  <text x="360" y="202" text-anchor="middle" class="white" font-size="11" opacity="0.9">skill at pre-change commit</text>
+
+  <!-- NEW arm -->
+  <rect x="270" y="305" width="180" height="70" rx="10" fill="url(#newArm)"/>
+  <text x="360" y="337" text-anchor="middle" class="white" font-size="14" font-weight="700">NEW  (v2.1)</text>
+  <text x="360" y="357" text-anchor="middle" class="white" font-size="11" opacity="0.9">skill at the change</text>
+
+  <!-- prompt -> arms -->
+  <path class="line" d="M200,255 C235,255 240,190 268,185" marker-end="url(#arrow)"/>
+  <path class="line" d="M200,272 C235,272 240,335 268,340" marker-end="url(#arrow)"/>
+
+  <!-- Repo nodes -->
+  <g>
+    <rect x="530" y="120" width="180" height="52" rx="9" fill="#ffffff" stroke="#CBD5E1" stroke-width="1.5"/>
+    <text x="620" y="143" text-anchor="middle" class="lbl">Python · REST API</text>
+    <text x="620" y="160" text-anchor="middle" class="sub">session auth</text>
+
+    <rect x="530" y="234" width="180" height="52" rx="9" fill="#ffffff" stroke="#CBD5E1" stroke-width="1.5"/>
+    <text x="620" y="257" text-anchor="middle" class="lbl">Node · SPA</text>
+    <text x="620" y="274" text-anchor="middle" class="sub">token auth</text>
+
+    <rect x="530" y="348" width="180" height="52" rx="9" fill="#ffffff" stroke="#CBD5E1" stroke-width="1.5"/>
+    <text x="620" y="371" text-anchor="middle" class="lbl">Go · gRPC</text>
+    <text x="620" y="388" text-anchor="middle" class="sub">no auth</text>
+  </g>
+
+  <!-- arms -> repos: 6 runs. OLD (light) + NEW (dark) into each repo -->
+  <path class="line-l" d="M450,178 C490,170 495,150 528,146" marker-end="url(#arrowLight)"/>
+  <path class="line-l" d="M450,185 C490,215 495,255 528,260" marker-end="url(#arrowLight)"/>
+  <path class="line-l" d="M450,192 C490,300 495,370 528,374" marker-end="url(#arrowLight)"/>
+
+  <path class="line" d="M450,340 C490,180 495,150 528,146" marker-end="url(#arrow)"/>
+  <path class="line" d="M450,340 C490,290 495,258 528,260" marker-end="url(#arrow)"/>
+  <path class="line" d="M450,348 C490,360 495,375 528,375" marker-end="url(#arrow)"/>
+
+  <!-- 6 runs caption -->
+  <text x="490" y="440" text-anchor="middle" class="sub" font-style="italic">2 versions × 3 repos = 6 identical runs</text>
+
+  <!-- Judge node -->
+  <rect x="790" y="200" width="180" height="106" rx="10" fill="url(#teal)"/>
+  <text x="880" y="234" text-anchor="middle" class="white" font-size="14" font-weight="700">Skill-blind</text>
+  <text x="880" y="252" text-anchor="middle" class="white" font-size="14" font-weight="700">judge</text>
+  <text x="880" y="276" text-anchor="middle" class="white" font-size="10.5" opacity="0.92">never sees which</text>
+  <text x="880" y="290" text-anchor="middle" class="white" font-size="10.5" opacity="0.92">version it grades</text>
+
+  <!-- repos -> judge -->
+  <path class="line" d="M710,146 C750,150 760,225 788,240" marker-end="url(#arrow)"/>
+  <path class="line" d="M710,260 C750,258 760,258 788,256" marker-end="url(#arrow)"/>
+  <path class="line" d="M710,374 C750,370 760,285 788,272" marker-end="url(#arrow)"/>
+
+  <!-- Bottom rule: two grading layers -->
+  <line x1="30" y1="468" x2="970" y2="468" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="30" y="492" font-size="12" font-weight="700" fill="#0B7A6E">Graded two ways:</text>
+  <text x="160" y="492" font-size="12" fill="#334155">deterministic process-checks (did it read the docs first? how many files?) + the blind judge, scored against a ground-truth answer key the agent never sees.</text>
+</svg>

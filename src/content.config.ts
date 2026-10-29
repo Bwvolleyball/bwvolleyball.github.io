@@ -79,6 +79,8 @@ const writing = defineCollection({
 		/** Featured first and marked "Start here". */
 		flagship: z.boolean().optional(),
 		href: z.string().url().optional(),
+		/** Where a piece hosted here first ran. It keeps its own page; this credits the original. */
+		original: z.object({ publisher: z.string(), url: z.string().url() }).optional(),
 	}),
 });
 
