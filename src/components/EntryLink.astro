@@ -1,0 +1,12 @@
+---
+import { isExternal, type WritingEntry } from '../lib/brand';
+
+// The title is the link. Off-site links open in a new tab and end with ↗.
+type Props = { entry: WritingEntry };
+const { entry } = Astro.props;
+const ext = isExternal(entry);
+---
+
+<a class="bw-wlink" href={entry.href} target={ext ? '_blank' : undefined} rel={ext ? 'noopener' : undefined}>
+	{entry.title}{ext && <span class="bw-ext" aria-hidden="true"> ↗</span>}{ext && <span class="bw-sr"> (opens in a new tab)</span>}
+</a>

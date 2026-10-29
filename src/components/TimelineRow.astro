@@ -1,0 +1,13 @@
+---
+// One role on the About timeline. Place inside <ol class="bw-tl-list">, newest first.
+type Props = { start: string; end: string; role: string; company: string; note?: string };
+const { start, end, role, company, note } = Astro.props;
+---
+
+<li class="bw-tl">
+	<span class="bw-mono bw-tl-when">{start} – {end}</span>
+	<span class="bw-tl-what">
+		<span class="bw-tl-role">{role}</span><span class="bw-tl-co"> · {company}</span>
+		{note && <span class="bw-tl-note">{note}</span>}
+	</span>
+</li>

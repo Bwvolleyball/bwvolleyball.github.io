@@ -1,0 +1,8 @@
+---
+import { formatMonth } from '../lib/brand';
+
+type Props = { /** ISO ('2024-10-01', '2024-10') or already-formatted text. */ date: string };
+const { date } = Astro.props;
+---
+
+<time class="bw-mono bw-date" datetime={date}>{formatMonth(date)}</time>

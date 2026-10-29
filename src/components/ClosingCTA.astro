@@ -1,0 +1,13 @@
+---
+import Button from './Button.astro';
+import { LINKEDIN } from '../lib/brand';
+
+// The single invitation, once per page, at the end.
+type Props = { text?: string; href?: string };
+const { text = 'Open to architecture advisory, technical partnerships and good conversations.', href = LINKEDIN } = Astro.props;
+---
+
+<section class="bw-cta">
+	<p class="bw-cta-text">{text}</p>
+	<Button href={href} external>Message me on LinkedIn →</Button>
+</section>

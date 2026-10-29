@@ -1,0 +1,8 @@
+---
+import { TYPES, type EntryType } from '../lib/brand';
+
+type Props = { type: EntryType };
+const { type } = Astro.props;
+---
+
+<span class="bw-mono bw-type">{TYPES[type] ?? type}</span>

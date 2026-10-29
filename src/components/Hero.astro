@@ -1,0 +1,17 @@
+---
+const HERO = {
+	kicker: 'Product Architect · Vanguard',
+	lead: 'I understand the vision.',
+	follow: 'I deliver the results.',
+	sub: 'Product Architect for Vanguard Personalized Indexing. Twelve years building fintech and security platforms at Schwab, StackHawk and Vanguard.',
+};
+
+type Props = { /** Pass '' to hide. */ kicker?: string; lead?: string; follow?: string; sub?: string };
+const { kicker = HERO.kicker, lead = HERO.lead, follow = HERO.follow, sub = HERO.sub } = Astro.props;
+---
+
+<section class="bw-hero">
+	{kicker && <p class="bw-mono bw-hero-kicker">{kicker}</p>}
+	<h1 class="bw-hero-title">{lead}<br /><span class="bw-hero-follow">{follow}</span></h1>
+	<p class="bw-hero-sub">{sub}</p>
+</section>

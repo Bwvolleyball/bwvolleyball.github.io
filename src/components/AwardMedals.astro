@@ -1,0 +1,25 @@
+---
+// Charles Schwab: 4 counts up as four award medals light in turn. Rendered at its final frame; the script animates it.
+type Props = { count?: number; label?: string };
+const { count = 4, label = 'Four company awards' } = Astro.props;
+---
+
+<div class="bw-motion bw-awards" role="img" aria-label={label} data-countup={count} data-countup-step="count-step-slow">
+	<span class="bw-metric" aria-hidden="true" data-countup-value>{count}</span>
+	<div class="bw-awards-row">
+		{
+			Array.from({ length: count }, () => (
+				<svg class="bw-medal bw-on" viewBox="0 0 36 48" aria-hidden="true" data-countup-item>
+					<path d="M10 0h7l-3 18h-7z" fill="currentColor" opacity="0.7" />
+					<path d="M19 0h7l3 18h-7z" fill="currentColor" />
+					<circle cx="18" cy="31" r="13" fill="currentColor" />
+					<circle class="bw-medal-ring" cx="18" cy="31" r="8" fill="none" stroke-width="2.5" />
+				</svg>
+			))
+		}
+	</div>
+</div>
+
+<script>
+	import '../scripts/count-up';
+</script>

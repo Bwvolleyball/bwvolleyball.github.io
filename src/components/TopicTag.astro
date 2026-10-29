@@ -1,0 +1,22 @@
+---
+import { TOPICS, type Topic } from '../lib/brand';
+
+type Props = {
+	topic: Topic;
+	/** Renders a filter toggle (aria-pressed) instead of a label. */
+	toggle?: boolean;
+	active?: boolean;
+};
+const { topic, toggle = false, active = false } = Astro.props;
+const label = TOPICS[topic] ?? topic;
+---
+
+{
+	toggle ? (
+		<button type="button" class:list={['bw-tag', 'bw-tag-btn', active && 'bw-on']} aria-pressed={active ? 'true' : 'false'} data-topic={topic}>
+			{label}
+		</button>
+	) : (
+		<span class="bw-tag">{label}</span>
+	)
+}
