@@ -1,4 +1,5 @@
 // Pure helpers ported from the design system's BrandonWard.util (personal-brand-design/project/components/bundle.js).
+import { site } from '../config/site';
 
 export type Topic = 'cloud' | 'mobile' | 'architecture';
 export type EntryType = 'essay' | 'talk' | 'external';
@@ -9,7 +10,7 @@ export const TOPICS: Record<Topic, string> = { cloud: 'Cloud', mobile: 'Mobile',
 export const TOPIC_KEYS = Object.keys(TOPICS) as Topic[];
 export const TYPES: Record<EntryType, string> = { essay: 'Essay', talk: 'Talk', external: 'External' };
 
-export const LINKEDIN = 'https://www.linkedin.com/in/bwvolleyball/';
+export const LINKEDIN = site.linkedin;
 
 export interface WritingEntry {
 	title: string;

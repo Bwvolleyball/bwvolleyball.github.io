@@ -1,38 +1,17 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Blueprint frame (light tokens): surface, 32px cobalt grid, IBM Plex, one cobalt accent. -->
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#05080C"/>
-      <stop offset="1" stop-color="#0F1C2D"/>
-    </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#F7AE3B"/>
-      <stop offset="0.5" stop-color="#38E3D2"/>
-      <stop offset="1" stop-color="#7BD4FF"/>
-    </linearGradient>
-    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="120" />
-    </filter>
+    <pattern id="og-grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" stroke="rgba(43,85,217,.10)" stroke-width="1"/>
+    </pattern>
   </defs>
-  <rect width="1200" height="630" fill="url(#bg)"/>
-  <circle cx="200" cy="120" r="220" fill="#F05F9F" fill-opacity="0.22" filter="url(#blur)"/>
-  <circle cx="980" cy="80" r="210" fill="#38E3D2" fill-opacity="0.22" filter="url(#blur)"/>
-  <circle cx="760" cy="520" r="230" fill="#F7AE3B" fill-opacity="0.18" filter="url(#blur)"/>
-  <rect x="80" y="90" width="1040" height="450" rx="28" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)"/>
-  <text x="120" y="200" fill="#F7AE3B" font-family="Space Grotesk, Inter, system-ui" font-weight="600" font-size="26">Brandon Ward</text>
-  <text x="120" y="270" fill="#F6F7FB" font-family="Space Grotesk, Inter, system-ui" font-weight="700" font-size="64">Engineering Leadership</text>
-  <text x="120" y="330" fill="#B8C2D7" font-family="Space Grotesk, Inter, system-ui" font-weight="500" font-size="28">Senior Software Engineer @ StackHawk</text>
-  <text x="120" y="380" fill="#91A0B9" font-family="Space Grotesk, Inter, system-ui" font-weight="400" font-size="24">Integrations, CI/CD guardrails, Kubernetes migrations, Gradle tooling.</text>
-  <g transform="translate(120 430)">
-    <rect width="170" height="48" rx="16" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)"/>
-    <text x="20" y="32" fill="#F6F7FB" font-family="Space Grotesk, Inter, system-ui" font-weight="600" font-size="18">Integrations</text>
-  </g>
-  <g transform="translate(310 430)">
-    <rect width="170" height="48" rx="16" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)"/>
-    <text x="24" y="32" fill="#F6F7FB" font-family="Space Grotesk, Inter, system-ui" font-weight="600" font-size="18">Delivery</text>
-  </g>
-  <g transform="translate(500 430)">
-    <rect width="210" height="48" rx="16" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)"/>
-    <text x="18" y="32" fill="#F6F7FB" font-family="Space Grotesk, Inter, system-ui" font-weight="600" font-size="18">Gradle &amp; CI/CD</text>
-  </g>
-  <line x1="120" y1="235" x2="420" y2="235" stroke="url(#accent)" stroke-width="5" stroke-linecap="round"/>
+  <rect width="1200" height="630" fill="#F3F5F8"/>
+  <rect width="1200" height="630" fill="url(#og-grid)"/>
+  <text x="96" y="112" fill="#0F1720" font-family="IBM Plex Mono, ui-monospace, monospace" font-weight="500" font-size="26">brandon_ward</text>
+  <line x1="96" y1="146" x2="1104" y2="146" stroke="#D3DAE3" stroke-width="2"/>
+  <text x="96" y="236" fill="#4B5866" font-family="IBM Plex Mono, ui-monospace, monospace" font-weight="500" font-size="22" letter-spacing="1.4">PRODUCT ARCHITECT · VANGUARD</text>
+  <text x="96" y="330" fill="#0F1720" font-family="IBM Plex Sans, system-ui, sans-serif" font-weight="600" font-size="76" letter-spacing="-1.9">I understand the vision.</text>
+  <text x="96" y="416" fill="#2B55D9" font-family="IBM Plex Sans, system-ui, sans-serif" font-weight="600" font-size="76" letter-spacing="-1.9">I deliver the results.</text>
+  <text x="96" y="500" fill="#4B5866" font-family="IBM Plex Sans, system-ui, sans-serif" font-weight="400" font-size="27">Product Architect for Vanguard Personalized Indexing. Twelve years building</text>
+  <text x="96" y="540" fill="#4B5866" font-family="IBM Plex Sans, system-ui, sans-serif" font-weight="400" font-size="27">fintech and security platforms at Schwab, StackHawk and Vanguard.</text>
 </svg>
