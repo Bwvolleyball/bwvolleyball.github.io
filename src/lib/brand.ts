@@ -74,7 +74,7 @@ export function filterByTopic(entries: WritingEntry[], topic: Topic | null): Wri
 }
 
 let uid = 0;
-/** A page-unique id for SVG gradients, menu panels and the like. */
+/** A page-unique id for SVG gradients, menu panels, and the like. */
 export function uniqueId(prefix: string): string {
 	uid += 1;
 	return `${prefix}-${uid.toString(36)}`;
