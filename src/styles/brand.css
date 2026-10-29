@@ -240,3 +240,8 @@ html { background: var(--surface); }
 .bw-theme-opt { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); }
 .bw-theme-icon { width: 16px; height: 16px; flex: none; }
 .bw-theme-icons .bw-theme-opt { min-width: var(--tap-target); padding: 0; }
+
+/* NavBar icons: a small line icon before each link's word. */
+.bw-nav-link { gap: var(--space-2); }
+.bw-nav-icon { width: 16px; height: 16px; flex: none; }
+.bw-nav-panel-links .bw-nav-icon { width: 18px; height: 18px; }
