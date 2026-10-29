@@ -1,12 +1,40 @@
-{
-  "draft": true,
-  "title": "Owning the security-testing platform",
-  "role": "Senior Software Engineer, Platform",
-  "team": "Platform engineering, end to end",
-  "stack": "Kotlin, Spring Boot, gRPC, REST, Argo, Kubernetes, Gradle, GitHub Actions, React",
-  "outcome": "A platform scaled, extended and shipped across scanning, test plugins, scan metrics and integrations",
-  "problem": "StackHawk's customers needed security testing that kept pace with how fast they ship: more kinds of tests, results they could act on, and hooks into the tools they already use, on a platform that had to keep scaling.",
-  "approach": "Scaled and extended the platform end to end. Built Kotlin/Spring Boot services exposing REST and gRPC for scanning workflows; added new types of testing plugins; reworked how scan results and metrics are presented; delivered integrations with GitHub, Snyk, Azure DevOps and more on Argo Workflows with hardened rollouts; built custom Gradle plugins and moved CI/CD to GitHub Actions with guardrails; modernized the React app's state layer.",
-  "impact": "A broader, faster platform that customers could fit into their existing SDLC, and engineers mentored across Kotlin, Gradle, Spring Boot, Kubernetes and iterative delivery.",
-  "metrics": []
-}
+---
+draft: true
+title: "Owning the security-testing platform"
+summary: "Full stack, end to end across StackHawk's security-testing platform: scanning, test plugins, scan results and metrics, integrations, and the pipeline underneath."
+role: "Senior Software Engineer"
+team: "Full stack, end to end"
+stack: "Kotlin, Spring Boot, gRPC, REST, Argo, Kubernetes, Gradle, GitHub Actions, React"
+outcome: "A platform scaled, extended and shipped across scanning, test plugins, scan metrics and integrations"
+---
+
+From January 2022 to August 2026 I was a Senior Software Engineer at StackHawk, working full stack and end to end across its security-testing platform. That meant the services that run scans, the kinds of tests a scan can run, how results and metrics reach the people who act on them, the integrations that connect it to the tools customers already use, and the build and delivery pipeline underneath all of it.
+
+## The problem
+
+StackHawk's customers needed security testing that kept pace with how fast they ship: more kinds of tests, results they could act on, and hooks into the tools they already use. All of it on a platform that had to keep scaling.
+
+## Scanning, and what a scan can test
+
+On the back end I built Kotlin and Spring Boot services that expose REST and gRPC for scanning workflows. I also added new types of testing plugins, so a scan could cover more ground.
+
+## Results people can act on
+
+I reworked how scan results and metrics are presented. On the front end I modernized the React app's state layer, moving it from Redux to nanostores, and tuned its performance to cut bundle weight.
+
+## Meeting customers in their tools
+
+I delivered integrations with GitHub, Snyk, Azure DevOps and more. They run on Argo Workflows and Jobs, with hardened rollout paths.
+
+## Builds and delivery
+
+- Built custom Gradle plugins.
+- Migrated CI/CD to GitHub Actions, with richer reports and guardrails.
+
+## The people
+
+I mentored engineers across Kotlin, Gradle, Spring Boot, Kubernetes and iterative delivery.
+
+## What it added up to
+
+A broader, faster platform that customers could fit into their existing SDLC.

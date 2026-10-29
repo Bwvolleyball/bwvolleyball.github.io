@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CaseStudyHeader from '../../components/CaseStudyHeader.astro';
 import Prose from '../../components/Prose.astro';
@@ -12,43 +12,31 @@ export async function getStaticPaths() {
 	return studies.map((study) => {
 		const card = cards.find((c) => c.story === study.id);
 		if (!card) throw new Error(`Case study "${study.id}" has no experience card whose story is "${study.id}".`);
-		return { params: { slug: study.id }, props: { study: study.data, card } };
+		return { params: { slug: study.id }, props: { study, card } };
 	});
 }
 
 const { study, card } = Astro.props;
+const { Content } = await render(study);
+const { data } = study;
 ---
 
-<BaseLayout title={`${study.title} · ${card.company} | Brandon Ward`} description={study.summary ?? card.summary} current="experience">
+<BaseLayout title={`${data.title} · ${card.company} | Brandon Ward`} description={data.summary} current="experience">
 	<CaseStudyHeader
 		brand={card.brand}
 		company={card.company}
 		dates={card.dates}
 		visual={card.visual}
-		title={study.title}
-		role={study.role}
-		team={study.team}
-		stack={study.stack}
-		outcome={study.outcome}
-		draft={study.draft}
+		title={data.title}
+		role={data.role}
+		team={data.team}
+		stack={data.stack}
+		outcome={data.outcome}
+		draft={data.draft}
 	/>
 	<section class="bw-page-sec">
 		<Prose>
-			<h2>Problem</h2>
-			<p>{study.problem}</p>
-			<h2>Approach</h2>
-			<p>{study.approach}</p>
-			<h2>Impact</h2>
-			<p>{study.impact}</p>
-			{
-				study.metrics.length > 0 && (
-					<ul>
-						{study.metrics.map((m) => (
-							<li>{m}</li>
-						))}
-					</ul>
-				)
-			}
+			<Content />
 		</Prose>
 	</section>
 	<ClosingCTA />

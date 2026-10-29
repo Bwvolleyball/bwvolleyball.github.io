@@ -49,22 +49,20 @@ const experience = defineCollection({
 	}),
 });
 
-// The stories behind the cards. Each id matches an experience card's `story`.
+// The stories behind the cards: blog-like reads (MDX) built from the resume content. Each id matches an experience
+// card's `story`. The frontmatter fills the CaseStudyHeader spec sheet; the body is the article.
 const caseStudies = defineCollection({
-	loader: glob({ pattern: '**/*.json', base: './src/content/case-studies' }),
+	loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/case-studies' }),
 	schema: z.object({
 		/** Unapproved copy: shows "Draft · for Brandon to edit". */
 		draft: z.boolean().default(false),
 		title: z.string(),
-		summary: z.string().optional(),
+		/** Used for the page description. */
+		summary: z.string(),
 		role: z.string(),
 		team: z.string().optional(),
 		stack: z.string(),
 		outcome: z.string(),
-		problem: z.string(),
-		approach: z.string(),
-		impact: z.string(),
-		metrics: z.array(z.string()).default([]),
 	}),
 });
 
