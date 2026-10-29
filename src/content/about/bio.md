@@ -1,5 +1,5 @@
 ---
-draft: true
+draft: false
 ---
 
 I understand the vision, and I deliver the results. I am the Product Architect for Vanguard Personalized Indexing, where I own the technical product direction and make sure it scales, stays resilient, and stays secure.
