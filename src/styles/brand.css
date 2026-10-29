@@ -235,3 +235,8 @@ html { background: var(--surface); }
 /* Hit areas: compact controls keep their drawn size but get a hit area at least tap-target tall. */
 .bw-theme-opt, .bw-tag-btn, .bw-nav-menu { position: relative; }
 .bw-theme-opt::after, .bw-tag-btn::after, .bw-nav-menu::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: max(100%, var(--tap-target)); transform: translateY(-50%); }
+
+/* ThemePicker icons: in the bar they stand alone (words for screen readers, tooltip on hover) in square segments. */
+.bw-theme-opt { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); }
+.bw-theme-icon { width: 16px; height: 16px; flex: none; }
+.bw-theme-icons .bw-theme-opt { min-width: var(--tap-target); padding: 0; }
